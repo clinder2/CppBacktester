@@ -1,7 +1,7 @@
 #include </Users/christopherlinder/Desktop/CppBacktester/Environ/event.hpp>
 
 using namespace std;
-using namespace event;
+//using namespace event;
 
 marketEvent::marketEvent() {
     type = "MARKET";

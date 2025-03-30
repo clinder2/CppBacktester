@@ -16,10 +16,16 @@ class dataHandler {
 
 
 class historicDataHandler : dataHandler {
-    historicDataHandler(vector<event> events, long start, long end, vector<string> symbol_list);
-    private: 
+    public: 
+        vector<event>* events;
+        long start;
+        long end;
+        vector<string>* symbol_list;
+        historicDataHandler(vector<event>* events, long start, long end, vector<string>* symbol_list);
         void _pull_process_symbols();
-        vector<double> _get_new_bar(string symbol);  
+        vector<double> _get_new_bar(string symbol);
+        vector<int> get_latest_bars(string symbol, int n);
+        void update_bars();
 };
 
 
