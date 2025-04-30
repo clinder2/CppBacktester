@@ -2,6 +2,7 @@
     "files.associations": {
         "*.py": "python",
         "iosfwd": "cpp",
-        "locale": "cpp"
+        "locale": "cpp",
+        "string": "cpp"
     }
 }
