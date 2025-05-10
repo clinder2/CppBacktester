@@ -1,0 +1,8 @@
+using xsltproc
+    : /opt/local/bin/xsltproc
+    ;
+
+using boostbook
+    : /opt/local/share/xsl/docbook-xsl/
+    : /opt/local/share/xml/docbook/4.2
+    ;

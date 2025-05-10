@@ -3,6 +3,10 @@
         {
             "name": "Mac",
             "includePath": [
+                "/usr/local/lib/**",
+                "/usr/local/include/**",
+                "/opt/local/include/boost/**",
+                "/opt/local/libexec/boost/1.76/include",
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/Environ"
             ],
@@ -13,7 +17,10 @@
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "macos-clang-arm64"
+            "intelliSenseMode": "macos-clang-arm64",
+            "compilerArgs": [
+                "-std=c++11"
+            ]
         }
     ],
     "version": 4
