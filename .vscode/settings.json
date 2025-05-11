@@ -8,6 +8,7 @@
         "includePath": "/opt/local/libexec/boost/1.76/include",
         "istream": "cpp",
         "vector": "cpp",
-        "tuple": "cpp"
+        "tuple": "cpp",
+        "iostream": "cpp"
     }
 }

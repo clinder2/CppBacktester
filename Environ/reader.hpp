@@ -34,9 +34,9 @@ class reader {
             string line;
 
             getline(file, line);
-            cout<<line<<"end\n";
+            //cout<<line<<"end\n";
             getline(file, line);
-            cout<<line<<"end\n";
+            //cout<<line<<"end\n";
             getline(file, line);
 
             while (getline(file, line)) {

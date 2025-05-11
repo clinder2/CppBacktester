@@ -20,7 +20,7 @@ struct bar {
 };
 
 class dataHandler {
-    virtual vector<int> get_latest_bars(string symbol, int n=1)=0;
+    virtual vector<bar> get_latest_bars(string symbol, int n=1)=0;
     virtual void update_bars()=0;
 };
 
@@ -32,13 +32,13 @@ class historicDataHandler : dataHandler {
         long end;
         vector<string>* symbol_list;
         map<string, map<long, map<string, double> > > symbol_data;
-        map<string, map<long, map<string, double> > > latest_symbol_data;
+        map<string, vector<bar>* > latest_symbol_data;
         string historic_csv_path;
 
         map<string,int> symbol_index;
         vector<long> times;
         historicDataHandler(vector<event>* events, long start, long end, vector<string>* symbol_list, string path);
-        vector<int> get_latest_bars(string symbol, int n=1);
+        vector<bar> get_latest_bars(string symbol, int n=1);
         void update_bars();
 
     private:
@@ -47,11 +47,11 @@ class historicDataHandler : dataHandler {
             symbol_data = r._pull_process_symbols_from_csv(historic_csv_path, symbol_list);
             for (auto s : *symbol_list) {
                 symbol_index[s] = 0;
+                latest_symbol_data[s] = new vector<bar>();
             }
             map<long, map<string, double> > temp = symbol_data[(*symbol_list)[0]];
             for (auto p : temp) {
                 times.push_back(p.first);
-                cout<<p.first<<"\n";
             }
         }
         bar _get_new_bar(string symbol) {
@@ -61,14 +61,15 @@ class historicDataHandler : dataHandler {
                 symbol_index[symbol]++;
                 bar temp;
                 temp.time = t;
-                temp.close = data[t]["close"];
-                temp.high = data[t]["high"];
-                temp.low = data[t]["low"];
-                temp.open = data[t]["open"];
-                temp.volume = data[t]["volume"];
+                temp.close = data[t]["Close"];
+                temp.high = data[t]["High"];
+                temp.low = data[t]["Low"];
+                temp.open = data[t]["Open"];
+                temp.volume = data[t]["Volume"];
                 return temp;
             } else {
                 bar temp;
+                temp.time = -1;
                 return temp;
             }
         }

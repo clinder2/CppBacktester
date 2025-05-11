@@ -19,20 +19,37 @@ historicDataHandler::historicDataHandler(vector<event>* _events, long _start, lo
     _pull_process_symbols();
 }
 
-vector<int> historicDataHandler::get_latest_bars(string symbol, int n) {
-    vector<int> a;
-    return a;
+vector<bar> historicDataHandler::get_latest_bars(string symbol, int n) {
+    vector<bar>* bars = latest_symbol_data[symbol];
+    vector<bar> latest;
+    if (bars->size()>=n) {
+        while (n>0) {
+            latest.push_back(bars->at(bars->size()-n));
+            n--;
+        }
+    }
+    return latest;
 }
 
 void historicDataHandler::update_bars() {
-
+    for (auto s : *symbol_list) {
+        bar curr = _get_new_bar(s);
+        if (curr.time!=-1) {
+            latest_symbol_data[s]->push_back(curr);
+        }
+    }
+    marketEvent* m = new marketEvent();
+    events->push_back(*m);
 }
 
 int main() {
-    vector<event>* queue;
+    vector<event>* queue = new vector<event>();
     vector<string> sym;
     sym.push_back("AAPL");
     sym.push_back("IONQ");
     sym.push_back("NVDA");
     historicDataHandler h(queue, 0, 0, &sym, "/Users/christopherlinder/Desktop/CppBacktester/HistoricData/test.csv");
+    //cout<<h.latest_symbol_data["APPL"]->size()<<" a \n";
+    h.update_bars();
+    cout<<h.latest_symbol_data["AAPL"]->at(0).close<<" a \n";
 }

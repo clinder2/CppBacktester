@@ -3,11 +3,11 @@
 using namespace std;
 //using namespace event;
 
-marketEvent::marketEvent() {
+/* marketEvent::marketEvent() {
     type = "MARKET";
-}
+} */
 
-signalEvent::signalEvent(string _symbol, long _datetime, string _signal_type) {
+/* signalEvent::signalEvent(string _symbol, long _datetime, string _signal_type) {
     type = "SIGNAL";
     symbol=_symbol;
     datetime=_datetime;
@@ -31,7 +31,7 @@ fillEvent::fillEvent(string _symbol, float _date_time, string _exchange, int _qu
     direction=_direction;
     fill_cost=_fill_cost;
     commission=calculate_ib_commission(commission);
-}
+} */
 
 float fillEvent::calculate_ib_commission(float commission) {
     float full_cost=1.3;
@@ -39,6 +39,6 @@ float fillEvent::calculate_ib_commission(float commission) {
 }
 
 int main() {
-    //event* e = new event();
+    marketEvent* e = new marketEvent();
     return 0;
 }
