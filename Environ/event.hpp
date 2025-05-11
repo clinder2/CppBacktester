@@ -10,6 +10,7 @@ using namespace std;
 class event {
     public:
         //event() {};
+        string type;
         virtual ~event() {};
 };
 
@@ -37,40 +38,44 @@ class signalEvent : public event {
 };
 
 class orderEvent : public event {
-    string type;
-    string symbol;
-    string order_type;
-    int quantity;
-    int direction;
-    orderEvent(string _symbol, string _order_type, int _quantity, int _direction) {
-        type = "ORDER";
-        symbol=_symbol;
-        order_type=_order_type;
-        quantity=_quantity;
-        direction=_direction;
-    }
+    public:
+        string type;
+        string symbol;
+        string order_type;
+        int quantity;
+        string direction;
+
+        orderEvent() {};
+        orderEvent(string _symbol, string _order_type, int _quantity, string _direction) {
+            type = "ORDER";
+            symbol=_symbol;
+            order_type=_order_type;
+            quantity=_quantity;
+            direction=_direction;
+        }
 };
 
 class fillEvent : public event {
-    string type;
-    long date_time;
-    string symbol;
-    string exchange;
-    int quantity;
-    int direction;
-    float fill_cost;
-    float commission;
-    fillEvent(string _symbol, float _date_time, string _exchange, int _quantity, int _direction, float _fill_cost, float _commission) {
-        type = "ORDER";
-        symbol=_symbol;
-        date_time=_date_time;
-        exchange=_exchange;
-        quantity=_quantity;
-        direction=_direction;
-        fill_cost=_fill_cost;
-        commission=calculate_ib_commission(commission);
-    }
-    float calculate_ib_commission(float commission);
+    public:
+        string type;
+        long date_time;
+        string symbol;
+        string exchange;
+        int quantity;
+        string direction;
+        float fill_cost;
+        float commission;
+        fillEvent(string _symbol, float _date_time, string _exchange, int _quantity, string _direction, float _fill_cost, float _commission) {
+            type = "ORDER";
+            symbol=_symbol;
+            date_time=_date_time;
+            exchange=_exchange;
+            quantity=_quantity;
+            direction=_direction;
+            fill_cost=_fill_cost;
+            commission=calculate_ib_commission(commission);
+        }
+        float calculate_ib_commission(float commission);
 };
 
 

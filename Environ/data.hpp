@@ -20,13 +20,19 @@ struct bar {
 };
 
 class dataHandler {
-    virtual vector<bar> get_latest_bars(string symbol, int n=1)=0;
-    virtual void update_bars()=0;
+    public:
+        virtual ~dataHandler() {};
+        vector<string>* symbol_list;
+        dataHandler(vector<string>* _symbol_list) {
+            symbol_list=_symbol_list;
+        }
+        virtual vector<bar> get_latest_bars(string symbol, int n=1) {};
+        virtual void update_bars() {};
 };
 
-
-class historicDataHandler : dataHandler {
+class historicDataHandler : public dataHandler {
     public: 
+        ~historicDataHandler() {};
         vector<event>* events;
         long start;
         long end;
@@ -34,12 +40,23 @@ class historicDataHandler : dataHandler {
         map<string, map<long, map<string, double> > > symbol_data;
         map<string, vector<bar>* > latest_symbol_data;
         string historic_csv_path;
+        bool continue_backtest;
 
         map<string,int> symbol_index;
         vector<long> times;
-        historicDataHandler(vector<event>* events, long start, long end, vector<string>* symbol_list, string path);
-        vector<bar> get_latest_bars(string symbol, int n=1);
-        void update_bars();
+        historicDataHandler(vector<event>* _events, long _start, long _end, vector<string>* _symbol_list, string path) : dataHandler(_symbol_list) {
+            events = _events;
+            start=_start;
+            end=_end;
+            symbol_list=_symbol_list;
+            historic_csv_path = path;
+
+            bool continue_backtest;
+
+            _pull_process_symbols();
+        }
+        vector<bar> get_latest_bars(string symbol, int n=1) override;
+        void update_bars() override;
 
     private:
         reader r;
@@ -68,6 +85,7 @@ class historicDataHandler : dataHandler {
                 temp.volume = data[t]["Volume"];
                 return temp;
             } else {
+                continue_backtest=false;
                 bar temp;
                 temp.time = -1;
                 return temp;
