@@ -3,6 +3,8 @@
 
 #include <string>
 #include <stdexcept>
+#include <vector>
+#include <deque>
 
 using namespace std;
 

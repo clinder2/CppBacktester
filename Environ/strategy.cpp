@@ -1,6 +1,6 @@
 #include "strategy.hpp"
 
-strategy::strategy(dataHandler* _bars, vector<event>* _events) {
+strategy::strategy(dataHandler* _bars, deque<event>* _events) {
     bars = _bars;
     symbol_list = *(_bars->symbol_list);
     events = _events;
@@ -19,7 +19,7 @@ map<string, bool> strategy::_calculate_initial_bought() {
 void strategy::calculate_signals(event e) {
     if (e.type=="MARKET") {
         for (auto s : symbol_list) {
-            vector<bar> b = bars->get_latest_bars(s);
+            vector<bar> b = bars->get_latest_bars(s,1);
             long datetime = b[0].time;
             if (b.size()>0) {
                 if (!bought[s]) {

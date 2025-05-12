@@ -6,7 +6,7 @@ class naivePortfolio : public portfolio {
     public:
         dataHandler* bars;
         vector<string>* symbol_list;
-        vector<event>* events;
+        deque<event>* events;
         long start_date;
         long init_capital;
 
@@ -14,7 +14,7 @@ class naivePortfolio : public portfolio {
         map<string, double> current_positions;
         vector<map<string, double> > all_holdings;
         map<string, double> current_holdings;
-        naivePortfolio(dataHandler* _bars, vector<event>* _events, long _start_date, long _init_capital=1000) {
+        naivePortfolio(dataHandler* _bars, deque<event>* _events, long _start_date, long _init_capital=1000) {
             bars=_bars;
             symbol_list=bars->symbol_list;
             events=_events;
@@ -113,8 +113,11 @@ class naivePortfolio : public portfolio {
             current_holdings["total"]-=(cost+fill.commission);
         }
 
-        void update_signal() {
-            cout<<"a";
+        void update_signal(signalEvent signal) {
+            if (signal.type=="SIGNAL") {
+                orderEvent order = generate_naive_order(signal);
+                events->push_back(order);
+            }
         }
         void update_fill(fillEvent e) {
             if (e.type=="FILL") {
@@ -156,7 +159,7 @@ class naivePortfolio : public portfolio {
 };
 
 int main() {
-    vector<event>* queue = new vector<event>();
+    deque<event>* queue = new deque<event>();
     vector<string> sym;
     sym.push_back("AAPL");
     sym.push_back("IONQ");
