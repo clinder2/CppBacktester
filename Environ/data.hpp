@@ -33,7 +33,7 @@ class dataHandler {
 class historicDataHandler : public dataHandler {
     public: 
         ~historicDataHandler() {};
-        deque<event>* events;
+        deque<event*>* events;
         long start;
         long end;
         vector<string>* symbol_list;
@@ -44,14 +44,14 @@ class historicDataHandler : public dataHandler {
 
         map<string,int> symbol_index;
         vector<long> times;
-        historicDataHandler(deque<event>* _events, long _start, long _end, vector<string>* _symbol_list, string path) : dataHandler(_symbol_list) {
-            events = _events;
+        historicDataHandler(deque<event*>& _events, long _start, long _end, vector<string>* _symbol_list, string path) : dataHandler(_symbol_list) {
+            events = &_events;
             start=_start;
             end=_end;
             symbol_list=_symbol_list;
             historic_csv_path = path;
 
-            bool continue_backtest;
+            continue_backtest = true;
 
             _pull_process_symbols();
         }

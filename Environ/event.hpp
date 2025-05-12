@@ -11,7 +11,6 @@ using namespace std;
 
 class event {
     public:
-        //event() {};
         string type;
         virtual ~event() {};
 };
@@ -19,7 +18,6 @@ class event {
 
 class marketEvent : public event {
     public:
-        string type;
         marketEvent() {
             type = "MARKET";
         }
@@ -27,7 +25,6 @@ class marketEvent : public event {
 
 class signalEvent : public event {
     public:
-        string type;
         string symbol;
         long datetime;
         string signal_type;
@@ -41,13 +38,15 @@ class signalEvent : public event {
 
 class orderEvent : public event {
     public:
-        string type;
         string symbol;
         string order_type;
         int quantity;
         string direction;
 
-        orderEvent() {};
+        orderEvent() {
+            type="ORDER";
+        }
+
         orderEvent(string _symbol, string _order_type, int _quantity, string _direction) {
             type = "ORDER";
             symbol=_symbol;
@@ -59,7 +58,7 @@ class orderEvent : public event {
 
 class fillEvent : public event {
     public:
-        string type;
+        //string type;
         long date_time;
         string symbol;
         string exchange;
@@ -68,7 +67,7 @@ class fillEvent : public event {
         float fill_cost;
         float commission;
         fillEvent(string _symbol, float _date_time, string _exchange, int _quantity, string _direction, float _fill_cost, float _commission) {
-            type = "ORDER";
+            type = "FILL";
             symbol=_symbol;
             date_time=_date_time;
             exchange=_exchange;

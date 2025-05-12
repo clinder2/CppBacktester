@@ -11,9 +11,9 @@ class strategy {
     public:
         dataHandler* bars;
         vector<string> symbol_list;
-        deque<event>* events;
+        deque<event*>* events;
         map<string, bool> bought;
-        strategy(dataHandler* bars, deque<event>* events);
+        strategy(dataHandler* bars, deque<event*>& events);
         void calculate_signals(event e);
 
     private:

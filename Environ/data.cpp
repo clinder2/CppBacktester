@@ -37,19 +37,6 @@ void historicDataHandler::update_bars() {
         }
     }
     marketEvent* m = new marketEvent();
-    events->push_back(*m);
+    events->push_back(m);
+    //cout<<events->size();
 }
-
-/* int main() {
-    vector<event>* queue = new vector<event>();
-    vector<string> sym;
-    sym.push_back("AAPL");
-    sym.push_back("IONQ");
-    sym.push_back("NVDA");
-    historicDataHandler* h2 = new historicDataHandler(queue, 0, 0, &sym, "/Users/christopherlinder/Desktop/CppBacktester/HistoricData/test.csv");
-    historicDataHandler h(queue, 0, 0, &sym, "/Users/christopherlinder/Desktop/CppBacktester/HistoricData/test.csv");
-    //cout<<h.latest_symbol_data["APPL"]->size()<<" a \n";
-    h.update_bars();
-    h2->update_bars();
-    cout<<h2->latest_symbol_data["AAPL"]->at(0).close<<" a \n";
-} */

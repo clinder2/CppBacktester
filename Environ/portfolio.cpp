@@ -1,12 +1,12 @@
 #include "portfolio.hpp"
-#include "event.hpp"
+//#include "event.hpp"
 #include <algorithm>
 
 class naivePortfolio : public portfolio {
     public:
         dataHandler* bars;
         vector<string>* symbol_list;
-        deque<event>* events;
+        deque<event*>* events;
         long start_date;
         long init_capital;
 
@@ -14,10 +14,10 @@ class naivePortfolio : public portfolio {
         map<string, double> current_positions;
         vector<map<string, double> > all_holdings;
         map<string, double> current_holdings;
-        naivePortfolio(dataHandler* _bars, deque<event>* _events, long _start_date, long _init_capital=1000) {
+        naivePortfolio(dataHandler* _bars, deque<event*>& _events, long _start_date, long _init_capital=1000) {
             bars=_bars;
             symbol_list=bars->symbol_list;
-            events=_events;
+            events=&_events;
             start_date=_start_date;
             init_capital=_init_capital;
 
@@ -115,7 +115,7 @@ class naivePortfolio : public portfolio {
 
         void update_signal(signalEvent signal) {
             if (signal.type=="SIGNAL") {
-                orderEvent order = generate_naive_order(signal);
+                orderEvent* order = generate_naive_order(signal);
                 events->push_back(order);
             }
         }
@@ -126,8 +126,7 @@ class naivePortfolio : public portfolio {
             }
         }
 
-        orderEvent generate_naive_order(signalEvent signal) {
-            orderEvent order;
+        orderEvent* generate_naive_order(signalEvent signal) {
             string symbol = signal.symbol;
             string direction = signal.signal_type;
             int strength = 1; //fix
@@ -136,29 +135,29 @@ class naivePortfolio : public portfolio {
             double curr_quantity = current_positions[symbol];
             string order_type = "MKT";
 
-            order.symbol=symbol;
-            order.order_type=order_type;
-            order.quantity=mkt_quantity;
+            long quantity=mkt_quantity;
+            string order_direction = "";
 
             if (direction=="LONG" && curr_quantity==0) {
-                order.direction="BUY";
+                order_direction="BUY";
             } else if (direction=="SHORT" && curr_quantity>0) {
-                order.direction="SELL";
+                order_direction="SELL";
             }
             if (direction=="EXIT" && curr_quantity>0) {
-                order.quantity=abs(curr_quantity);
-                order.direction="SELL";
+                quantity=abs(curr_quantity);
+                order_direction="SELL";
             }
             if (direction=="EXIT" && curr_quantity<0) {
-                order.quantity=abs(curr_quantity);
-                order.direction="BUY";
+                quantity=abs(curr_quantity);
+                order_direction="BUY";
             }
-
+            
+            orderEvent* order = new orderEvent(symbol, order_type, mkt_quantity, order_direction);
             return order;
         }
 };
 
-int main() {
+/* int main() {
     deque<event>* queue = new deque<event>();
     vector<string> sym;
     sym.push_back("AAPL");
@@ -168,4 +167,4 @@ int main() {
     h->update_bars();
     //cout<<h->symbol_data["AAPL"].size()<<" a \n";
     naivePortfolio* p = new naivePortfolio(h, queue, 0);
-}
+} */

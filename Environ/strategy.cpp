@@ -1,9 +1,9 @@
 #include "strategy.hpp"
 
-strategy::strategy(dataHandler* _bars, deque<event>* _events) {
+strategy::strategy(dataHandler* _bars, deque<event*>& _events) {
     bars = _bars;
     symbol_list = *(_bars->symbol_list);
-    events = _events;
+    events = &_events;
 
     bought = _calculate_initial_bought();
 }
@@ -24,7 +24,7 @@ void strategy::calculate_signals(event e) {
             if (b.size()>0) {
                 if (!bought[s]) {
                     signalEvent* signal = new signalEvent(s, datetime, "LONG");
-                    events->push_back(*signal);
+                    events->push_back(signal);
                     bought[s] = true;
                 }
             }

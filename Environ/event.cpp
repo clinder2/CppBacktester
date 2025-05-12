@@ -37,8 +37,3 @@ float fillEvent::calculate_ib_commission(float commission) {
     float full_cost=1.3;
     return full_cost*quantity*fill_cost;
 }
-
-int main() {
-    marketEvent* e = new marketEvent();
-    return 0;
-}

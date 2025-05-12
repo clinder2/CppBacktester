@@ -12,9 +12,9 @@ class executionHandler {
 
 class simulatedExecutionHandler : public executionHandler {
     public:
-        deque<event>* events;
+        deque<event*>* events;
 
-        simulatedExecutionHandler(deque<event>* _events);
+        simulatedExecutionHandler(deque<event*>& _events);
         void execute_order(orderEvent _event) override;
 };
 
