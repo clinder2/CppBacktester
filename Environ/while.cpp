@@ -12,11 +12,14 @@ While::While(vector<string>* _assets, string _algo, long _start, long _end, long
 void While::while_loop() {
     deque<event*> q = *(new deque<event*>());
     historicDataHandler temp(q, start, end, assets, "/Users/christopherlinder/Desktop/CppBacktester/HistoricData/test.csv");
-    naivePortfolio* port = nullptr;
+    //naivePortfolio* port = nullptr;
+    portfolio* port = nullptr;
     if (p_type=="SIMPLE") {
         port = new naivePortfolio(&temp, q, start);
+        port = dynamic_cast<naivePortfolio*>(port);
     } else if (p_type=="MODULAR") {
-        //TODO
+        //port = new MPortfolio(&temp, q, start);
+        //port = dynamic_cast<MPortfolio*>(port);
     }
     strategy s(&temp, q);
     if (algo=="GA") {
@@ -40,11 +43,14 @@ void While::while_loop() {
                 s.calculate_signals(*e);
             } else if (e->type == "SIGNAL") {
                 port->update_signal(*dynamic_cast<signalEvent*>(e));
+            } else if (e->type=="COMPLEX") {
+                port->update_signal(*dynamic_cast<complexSignalEvent*>(e));
             } else if (e->type == "ORDER") {
                 executor.execute_order(*dynamic_cast<orderEvent*>(e));
             } else if (e->type == "FILL") {;
                 port->update_fill(*dynamic_cast<fillEvent*>(e));
             }
         }
+        cout<<port->current_holdings["total"]<<"\n";
     }
 }

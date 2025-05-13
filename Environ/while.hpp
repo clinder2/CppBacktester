@@ -6,9 +6,11 @@
 #include "data.hpp"
 //#include "data.cpp"
 #include "portfolio.hpp"
-#include "portfolio.cpp"
+//#include "portfolio.cpp"
+#include "MPortfolio.cpp"
 #include "strategy.hpp"
-#include "strategy.cpp"
+//#include "strategy.cpp"
+#include "MRStrategy.cpp"
 #include "execution.hpp"
 #include "execution.cpp"
 

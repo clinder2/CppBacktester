@@ -36,6 +36,17 @@ class signalEvent : public event {
         }
 };
 
+class complexSignalEvent : public signalEvent {
+    public:
+        long quantity;
+        string algo;
+        complexSignalEvent(string symbol, long datetime, long _quantity, string signal_type, string _algo) : signalEvent(symbol ,datetime, signal_type) {
+            type="COMPLEX";
+            quantity = _quantity;
+            algo=_algo;
+        }
+};
+
 class orderEvent : public event {
     public:
         string symbol;

@@ -4,16 +4,6 @@
 
 class naivePortfolio : public portfolio {
     public:
-        dataHandler* bars;
-        vector<string>* symbol_list;
-        deque<event*>* events;
-        long start_date;
-        long init_capital;
-
-        vector<map<string, double> > all_positions;
-        map<string, double> current_positions;
-        vector<map<string, double> > all_holdings;
-        map<string, double> current_holdings;
         naivePortfolio(dataHandler* _bars, deque<event*>& _events, long _start_date, long _init_capital=1000) {
             bars=_bars;
             symbol_list=bars->symbol_list;

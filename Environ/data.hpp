@@ -23,6 +23,7 @@ class dataHandler {
     public:
         virtual ~dataHandler() {};
         vector<string>* symbol_list;
+        map<string, vector<bar>* > latest_symbol_data;
         dataHandler(vector<string>* _symbol_list) {
             symbol_list=_symbol_list;
         }
