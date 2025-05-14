@@ -1,9 +1,9 @@
 #include "strategy.hpp"
 
-strategy::strategy(dataHandler* _bars, deque<event*>& _events) {
-    bars = _bars;
-    symbol_list = *(_bars->symbol_list);
-    events = &_events;
+strategy::strategy(dataHandler* _bars, deque<event*>& _events) : strategy_base(_bars, _events) {
+    //bars = _bars;
+    //symbol_list = *(_bars->symbol_list);
+    //events = &_events;
 
     bought = _calculate_initial_bought();
 }

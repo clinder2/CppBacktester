@@ -2,14 +2,14 @@
 #include "strategy.cpp"
 
 //mean reversion-Brollinger bands strategy
-class MRStrategy : public strategy {
+class MRStrategy : public strategy_base {
     public:
         int window; //lookback window
         map<string, vector<double> > sum;
         map<string, vector<double> > sq_sum;
         map<string, vector<double> > upper;
         map<string, vector<double> > lower;
-        MRStrategy(dataHandler* bars, deque<event*>& events, int _window) : strategy(bars, events) {
+        MRStrategy(dataHandler* bars, deque<event*>& events, int _window) : strategy_base(bars, events) {
             window = _window;
             for (auto s : symbol_list) {
                 sum[s] = *(new vector<double>());

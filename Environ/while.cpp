@@ -18,14 +18,19 @@ void While::while_loop() {
         port = new naivePortfolio(&temp, q, start);
         port = dynamic_cast<naivePortfolio*>(port);
     } else if (p_type=="MODULAR") {
-        //port = new MPortfolio(&temp, q, start);
-        //port = dynamic_cast<MPortfolio*>(port);
+        port = new MPortfolio(&temp, q, start);
+        port = dynamic_cast<MPortfolio*>(port);
     }
-    strategy s(&temp, q);
+    //strategy s(&temp, q);
+    strategy_base* s = nullptr;
     if (algo=="GA") {
         //TODO
     } else if (algo=="MA") {
-        //TODO
+        s=new MRStrategy(&temp, q, 10);
+        s=dynamic_cast<MRStrategy*>(s);
+    } else if (algo=="BUYANDHOLD") {
+        s=new strategy(&temp, q);
+        s=dynamic_cast<strategy*>(s);
     }
     simulatedExecutionHandler executor(q);
     bool testing = true;
@@ -40,7 +45,7 @@ void While::while_loop() {
             cout<<e->type<<"\n";
             if (e->type=="MARKET") {
                 port->update_timeindex(*e);
-                s.calculate_signals(*e);
+                s->calculate_signals(*e);
             } else if (e->type == "SIGNAL") {
                 port->update_signal(*dynamic_cast<signalEvent*>(e));
             } else if (e->type=="COMPLEX") {
