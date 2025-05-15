@@ -48,8 +48,6 @@ void While::while_loop() {
                 s->calculate_signals(*e);
             } else if (e->type == "SIGNAL") {
                 port->update_signal(*dynamic_cast<signalEvent*>(e));
-            } else if (e->type=="COMPLEX") {
-                port->update_signal(*dynamic_cast<complexSignalEvent*>(e));
             } else if (e->type == "ORDER") {
                 executor.execute_order(*dynamic_cast<orderEvent*>(e));
             } else if (e->type == "FILL") {;

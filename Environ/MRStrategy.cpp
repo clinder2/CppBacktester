@@ -1,19 +1,19 @@
 #include "strategy.hpp"
 #include "strategy.cpp"
+//#include "/Users/christopherlinder/Desktop/CppBacktester/Environ/gnuplot-iostream/gnuplot-iostream.h"
+//#include "/Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost/regex.hpp"
 
 //mean reversion-Brollinger bands strategy
 class MRStrategy : public strategy_base {
     public:
         int window; //lookback window
         map<string, vector<double> > sum;
-        map<string, vector<double> > sq_sum;
         map<string, vector<double> > upper;
         map<string, vector<double> > lower;
         MRStrategy(dataHandler* bars, deque<event*>& events, int _window) : strategy_base(bars, events) {
             window = _window;
             for (auto s : symbol_list) {
                 sum[s] = *(new vector<double>());
-                sq_sum[s] = *(new vector<double>());
                 upper[s] = *(new vector<double>());
                 lower[s] = *(new vector<double>());
             }
@@ -32,8 +32,10 @@ class MRStrategy : public strategy_base {
                     } else if (cost <= lower[s].back()) {
                         type="BUY";
                     }
-                    complexSignalEvent* signal = new complexSignalEvent(s, datetime, quantity, type, "MR");
+                    cout<<s<<", "<<type<<"\n";
+                    signalEvent* signal = new signalEvent(s, datetime, type, quantity, "MR");
                     events->push_back(signal);
+                    cout<<upper[s].back()<<", "<<lower[s].back()<<", "<<cost<<"\n";
                 }
             }
         }
@@ -43,26 +45,23 @@ class MRStrategy : public strategy_base {
             map<string, vector<bar>* > data = bars->latest_symbol_data;
             for (auto s : symbol_list) {
                 int n = data[s]->size();
-                double next = 0;
                 double value = data[s]->back().close;
-                if (data[s]->size()>=window) {
+                double next = value;
+                if (data[s]->size() >= window) {
                     next = sum[s].back() + value - data[s]->at(n-window).close;
-                    //next/=window;
-                } else {
+                } else if (sum[s].size()>0) {
                     next = sum[s].back()+value;
                 }
                 sum[s].push_back(next);
-                double prev=0;
-                if (n>=1) {
-                    prev = sq_sum[s].back()+(value*value);
-                } else {
-                    prev = value*value;
-                }
-                sq_sum[s].push_back(prev);
                 double m = sum[s].back()/window;
-                double sd = ((sq_sum[s].back()-sq_sum[s].at(max(0, n+1-window)))/window)-(m*m);
+                double sd;
+                for (int i = max(0, n-window); i<n; i++) {
+                    sd+=pow(data[s]->at(i).close - m, 2);
+                }
+                sd=sqrt(sd/(window-1));
                 upper[s].push_back(m+2*sd);
                 lower[s].push_back(m-2*sd);
+                //cout<<s<<", "<<m<<", "<<sd<<"\n";
             }
         }
 };

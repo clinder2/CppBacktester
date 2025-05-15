@@ -5,15 +5,23 @@
             "label": "C/C++: clang build active file",
             "command": "/usr/bin/clang",
             "args": [
-                "/std:c++latest",
+                //"/std:c++latest",
                 "-std=c++17",
                 "-fcolor-diagnostics",
                 "-fansi-escape-codes",
-                "-I/opt/local/libexec/boost/1.76/include",
+                //"-I/opt/homebrew/Cellar/boost/1.88.0",
+                "-I /Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost",
+                //"-I/Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost",
+                //"-I/opt/local/libexec/boost/1.76/include",
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-lboost_system",
+                "-lboost_regex",
+                "-L/Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost/stage/lib"
+                //"/I", "/Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost",
+                //"/link", "/Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost/stage/lib"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -29,4 +37,20 @@
         }
     ],
     "version": "2.0.0"
+    /* "tasks": [
+        {
+            "type": "shell",
+            "label": "clang++ build active file",
+            "command": "/usr/bin/clang++",
+            "args": [
+                "-g",
+                "${fileDirname}/*.cpp",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-I/Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost",
+                "-L/Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost/stage/lib"
+            ],
+        }
+    ],
+    "version": "2.0.0" */
 }

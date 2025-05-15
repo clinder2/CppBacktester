@@ -14,6 +14,8 @@
 # EXTERNAL cache entries
 ########################
 
+Boost_DATE_TIME_LIBRARY_RELEASE:STRING=/opt/homebrew/lib/libboost_date_time.dylib
+
 //The directory containing a CMake configuration file for Boost.
 Boost_DIR:PATH=/opt/homebrew/lib/cmake/Boost-1.88.0
 
@@ -276,6 +278,9 @@ Qt5Widgets_DIR:PATH=Qt5Widgets_DIR-NOTFOUND
 //The directory containing a CMake configuration file for boost_atomic.
 boost_atomic_DIR:PATH=/opt/homebrew/lib/cmake/boost_atomic-1.88.0
 
+//The directory containing a CMake configuration file for boost_date_time.
+boost_date_time_DIR:PATH=/opt/homebrew/lib/cmake/boost_date_time-1.88.0
+
 //The directory containing a CMake configuration file for boost_filesystem.
 boost_filesystem_DIR:PATH=/opt/homebrew/lib/cmake/boost_filesystem-1.88.0
 
@@ -445,7 +450,7 @@ CURL_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CURL_LIBRARY_RELEASE
 CURL_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 //Details about finding Boost
-FIND_PACKAGE_MESSAGE_DETAILS_Boost:INTERNAL=[/opt/homebrew/lib/cmake/Boost-1.88.0/BoostConfig.cmake][found components: filesystem regex ][v1.88.0(1.60)]
+FIND_PACKAGE_MESSAGE_DETAILS_Boost:INTERNAL=[/opt/homebrew/lib/cmake/Boost-1.88.0/BoostConfig.cmake][found components: regex system date_time ][v1.88.0()]
 //Details about finding CURL
 FIND_PACKAGE_MESSAGE_DETAILS_CURL:INTERNAL=[/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/libcurl.tbd][/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include][ ][v8.4.0()]
 //ADVANCED property for variable: PKG_CONFIG_ARGN
@@ -454,6 +459,8 @@ PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
 PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: boost_atomic_DIR
 boost_atomic_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: boost_date_time_DIR
+boost_date_time_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: boost_filesystem_DIR
 boost_filesystem_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: boost_headers_DIR

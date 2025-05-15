@@ -7,7 +7,7 @@
             
 } */
 
-int main() {
+/* int main() {
     reader r;
 
     vector<string> sym;
@@ -16,7 +16,7 @@ int main() {
     sym.push_back("NVDA");
 
     r._pull_process_symbols_from_csv("/Users/christopherlinder/Desktop/CppBacktester/HistoricData/test.csv", &sym);
-    /* ifstream file("/Users/christopherlinder/Desktop/CppBacktester/HistoricData/test.csv");
+    ifstream file("/Users/christopherlinder/Desktop/CppBacktester/HistoricData/test.csv");
     string line;
     while (getline(file, line)) {
         stringstream ss(line);
@@ -33,6 +33,6 @@ int main() {
             //cout<<cell<<" \n";
         }
     }
-    file.close(); */
+    file.close();
     return 0;
-}
+} */

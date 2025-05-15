@@ -11,7 +11,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Boost 1.60 COMPONENTS filesystem regex)
+find_package(Boost 1.88 COMPONENTS filesystem regex)
+find_package( Boost REQUIRED COMPONENTS regex system date_time )
 IF (Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIR})
 

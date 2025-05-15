@@ -23,7 +23,7 @@ void strategy::calculate_signals(event e) {
             long datetime = b[0].time;
             if (b.size()>0) {
                 if (!bought[s]) {
-                    signalEvent* signal = new signalEvent(s, datetime, "LONG");
+                    signalEvent* signal = new signalEvent(s, datetime, "LONG", 1, "BUYANDHOLD");
                     events->push_back(signal);
                     bought[s] = true;
                 }

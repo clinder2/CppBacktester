@@ -28,11 +28,15 @@ class signalEvent : public event {
         string symbol;
         long datetime;
         string signal_type;
-        signalEvent(string _symbol, long _datetime, string _signal_type) {
+        long quantity;
+        string algo;
+        signalEvent(string _symbol, long _datetime, string _signal_type, long _quantity, string _algo) {
             type = "SIGNAL";
             symbol=_symbol;
             datetime=_datetime;
             signal_type=_signal_type;
+            quantity=_quantity;
+            algo=_algo;
         }
 };
 
@@ -40,7 +44,7 @@ class complexSignalEvent : public signalEvent {
     public:
         long quantity;
         string algo;
-        complexSignalEvent(string symbol, long datetime, long _quantity, string signal_type, string _algo) : signalEvent(symbol ,datetime, signal_type) {
+        complexSignalEvent(string symbol, long datetime, long _quantity, string signal_type, string _algo) : signalEvent(symbol ,datetime, signal_type, _quantity, _algo) {
             type="COMPLEX";
             quantity = _quantity;
             algo=_algo;

@@ -37,9 +37,9 @@ class historicDataHandler : public dataHandler {
         deque<event*>* events;
         long start;
         long end;
-        vector<string>* symbol_list;
+        //vector<string>* symbol_list;
         map<string, map<long, map<string, double> > > symbol_data;
-        map<string, vector<bar>* > latest_symbol_data;
+        //map<string, vector<bar>* > latest_symbol_data;
         string historic_csv_path;
         bool continue_backtest;
 

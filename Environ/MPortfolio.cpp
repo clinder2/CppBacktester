@@ -5,7 +5,7 @@ class MPortfolio : public naivePortfolio {
     public:
         MPortfolio(dataHandler* _bars, deque<event*>& _events, long _start_date, long _init_capital=1000) : naivePortfolio( _bars, _events, _start_date, _init_capital) {};
         
-        orderEvent* generate_order(complexSignalEvent signal) {
+        orderEvent* generate_order(signalEvent signal) {
             string symbol = signal.symbol;
             string algo = signal.algo;
 
@@ -33,8 +33,8 @@ class MPortfolio : public naivePortfolio {
             return order;
         }
 
-        void update_signal(complexSignalEvent signal) {
-            if (signal.type=="COMPLEX") {
+        void update_signal(signalEvent signal) {
+            if (signal.type=="SIGNAL") {
                 orderEvent* order = generate_order(signal);
                 events->push_back(order);
             }

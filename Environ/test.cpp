@@ -1,7 +1,8 @@
 #include "event.hpp"
 #include "while.hpp"
 #include "while.cpp"
-//#include <boost.hpp>
+#include <boost/algorithm/algorithm.hpp>
+//#include "gnuplot-iostream/gnuplot-iostream.h"
 //#include "/Users/christopherlinder/opt/anaconda3/pkgs/libboost-1.82.0-hf53b9f2_2/include/boost/mpi/python.hpp"
 
 long t(string temp) {
@@ -37,7 +38,7 @@ int main() {
     sym.push_back("AAPL");
     sym.push_back("IONQ");
     sym.push_back("NVDA");
-    While w(&sym, "BUYANDHOLD", start, end, 1000, "SIMPLE");
+    While w(&sym, "MA", start, end, 1000, "MODULAR");
     w.while_loop();
     return 0;
 }
