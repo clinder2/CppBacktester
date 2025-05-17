@@ -2,6 +2,9 @@
 #include "while.hpp"
 #include "while.cpp"
 #include <boost/algorithm/algorithm.hpp>
+#include <boost/iostreams/device/file_descriptor.hpp>
+#include <boost/ptr_container/ptr_vector.hpp>
+//#include "matplotlib-cpp/matplotlibcpp.h"
 //#include "gnuplot-iostream/gnuplot-iostream.h"
 //#include "/Users/christopherlinder/opt/anaconda3/pkgs/libboost-1.82.0-hf53b9f2_2/include/boost/mpi/python.hpp"
 
@@ -14,6 +17,7 @@ long t(string temp) {
 }
 
 int main() {
+    boost::ptr_vector<int> a;
     long start = t("2025-04-01");
     long end = t("2025-04-20");
 

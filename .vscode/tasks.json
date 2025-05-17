@@ -9,6 +9,8 @@
                 "-std=c++17",
                 "-fcolor-diagnostics",
                 "-fansi-escape-codes",
+                "-I /Users/christopherlinder/miniconda3/include/python3.12",
+                "-I Library/Frameworks/Python.framework/Versions/3.12/bin/python3",
                 //"-I/opt/homebrew/Cellar/boost/1.88.0",
                 "-I /Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost",
                 //"-I/Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost",

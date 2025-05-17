@@ -1,6 +1,6 @@
 CXX := clang++
 CXXFLAGS := -g -std=c++11
-INCLUDES := -I /Users/christopherlinder/Library/Mobile\ Documents/.Trash/boost/boost
+INCLUDES := -I /Users/christopherlinder/Library/Mobile\ Documents/.Trash/boost/boost -I /Users/christopherlinder/miniconda3/include/python3.12
 
 BUILD_DIR := build
 #SOURCES:=$(shell find . -type f -name '*.cpp')
