@@ -42,7 +42,7 @@ void While::while_loop() {
         while (q.size()>0) {
             event* e = q.front();
             q.pop_front();
-            cout<<e->type<<"\n";
+            //cout<<e->type<<"\n";
             if (e->type=="MARKET") {
                 port->update_timeindex(*e);
                 s->calculate_signals(*e);
@@ -54,6 +54,7 @@ void While::while_loop() {
                 port->update_fill(*dynamic_cast<fillEvent*>(e));
             }
         }
-        cout<<port->current_holdings["total"]<<"\n";
+        cout<<port->current_holdings["total"]<<" total\n";
     }
+    s->plotData(2);
 }

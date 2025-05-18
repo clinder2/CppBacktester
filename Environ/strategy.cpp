@@ -31,3 +31,7 @@ void strategy::calculate_signals(event e) {
         }
     }
 }
+
+void strategy::plotData(int type) {
+
+}

@@ -1,6 +1,6 @@
 #include "portfolio.hpp"
 //#include "event.hpp"
-#include <algorithm>
+//#include <algorithm>
 
 class naivePortfolio : public portfolio {
     public:
@@ -121,7 +121,7 @@ class naivePortfolio : public portfolio {
             string direction = signal.signal_type;
             int strength = 1; //fix
 
-            int mkt_quantity = floor(100*strength);
+            int mkt_quantity = floor(1*strength);
             double curr_quantity = current_positions[symbol];
             string order_type = "MKT";
 

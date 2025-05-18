@@ -1,12 +1,8 @@
-#include "event.hpp"
-#include "while.hpp"
-#include "while.cpp"
-#include <boost/algorithm/algorithm.hpp>
-#include <boost/iostreams/device/file_descriptor.hpp>
-#include <boost/ptr_container/ptr_vector.hpp>
-//#include "matplotlib-cpp/matplotlibcpp.h"
+#include "test.hpp"
 //#include "gnuplot-iostream/gnuplot-iostream.h"
 //#include "/Users/christopherlinder/opt/anaconda3/pkgs/libboost-1.82.0-hf53b9f2_2/include/boost/mpi/python.hpp"
+
+namespace plt = matplotlibcpp;
 
 long t(string temp) {
     tm time = {};
@@ -17,9 +13,14 @@ long t(string temp) {
 }
 
 int main() {
+    vector<double> y;
+    y.push_back(1);
+    y.push_back(2);
+    //plt::plot(y);
+    //plt::show();
     boost::ptr_vector<int> a;
-    long start = t("2025-04-01");
-    long end = t("2025-04-20");
+    long start = t("2025-01-02");
+    long end = t("2025-05-12");
 
     deque<event>* queue = new deque<event>();
     vector<string> sym;
@@ -42,6 +43,8 @@ int main() {
     sym.push_back("AAPL");
     sym.push_back("IONQ");
     sym.push_back("NVDA");
+    sym.push_back("PLTR");
+    cout<<sym.size();
     While w(&sym, "MA", start, end, 1000, "MODULAR");
     w.while_loop();
     return 0;

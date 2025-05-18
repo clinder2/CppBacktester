@@ -1,5 +1,6 @@
-#include "strategy.hpp"
+//#include "strategy.hpp"
 #include "strategy.cpp"
+#include "graphUtils.cpp"
 //#include "/Users/christopherlinder/Desktop/CppBacktester/Environ/gnuplot-iostream/gnuplot-iostream.h"
 //#include "/Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost/regex.hpp"
 
@@ -38,6 +39,27 @@ class MRStrategy : public strategy_base {
                     cout<<upper[s].back()<<", "<<lower[s].back()<<", "<<cost<<"\n";
                 }
             }
+        }
+
+        void plotData(int type) {
+            if (type==1) {
+                string symbol = symbol_list.back();
+                plotTimeSeries(sum[symbol], 1);
+            } else if (type==2) {
+                for (auto s : symbol_list) {
+                    plotBrollinger(s);
+                }
+            }
+        }
+        
+        void plotBrollinger(string symbol) {
+            vector<double> MA;
+            for (int i = 0; i < sum[symbol].size(); i++) {
+                MA.push_back(sum[symbol][i]/window);
+            }
+            vector<double> low = lower[symbol];
+            vector<double> high = upper[symbol];
+            BrollingerPlot(MA, low, high, 1);
         }
 
     private:

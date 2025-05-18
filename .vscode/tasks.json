@@ -10,7 +10,8 @@
                 "-fcolor-diagnostics",
                 "-fansi-escape-codes",
                 "-I /Users/christopherlinder/miniconda3/include/python3.12",
-                "-I Library/Frameworks/Python.framework/Versions/3.12/bin/python3",
+                "-L /Users/christopherlinder/miniconda3/lib",
+                "-lpython3.12",
                 //"-I/opt/homebrew/Cellar/boost/1.88.0",
                 "-I /Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost",
                 //"-I/Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost",
@@ -21,6 +22,7 @@
                 "${fileDirname}/${fileBasenameNoExtension}",
                 "-lboost_system",
                 "-lboost_regex",
+                "-lpython3.7",
                 "-L/Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost/stage/lib"
                 //"/I", "/Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost",
                 //"/link", "/Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost/stage/lib"

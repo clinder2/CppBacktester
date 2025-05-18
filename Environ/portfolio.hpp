@@ -1,9 +1,11 @@
 #ifndef PORTFOLIO_H
 #define PORTFOLIO_H
 
-#include "event.hpp"
+/* #include "event.hpp"
 #include "data.hpp"
-#include "data.cpp"
+#include "data.cpp" */
+//#include "eventDatautils.hpp"
+#include "MRStrategy.cpp"
 
 class portfolio {
     public:

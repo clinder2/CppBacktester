@@ -1,8 +1,9 @@
 #ifndef STRATEGY_H
 #define STRATEGY_H
 
-#include "event.hpp"
-#include "data.hpp"
+//#include "event.hpp"
+//#include "data.hpp"
+#include "eventDatautils.hpp"
 
 using namespace std;
 
@@ -19,6 +20,7 @@ class strategy_base {
             events=&_events;
         }
         virtual void calculate_signals(event e)=0;
+        virtual void plotData(int type)=0;
 };
 
 class strategy : public strategy_base {
@@ -29,6 +31,7 @@ class strategy : public strategy_base {
         map<string, bool> bought; */
         strategy(dataHandler* bars, deque<event*>& events);
         void calculate_signals(event e);
+        void plotData(int type);
 
     private:
         map<string, bool> _calculate_initial_bought();
