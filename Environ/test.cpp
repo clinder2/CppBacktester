@@ -1,4 +1,5 @@
 #include "test.hpp"
+#include <boost/intrusive/list.hpp>
 //#include "gnuplot-iostream/gnuplot-iostream.h"
 //#include "/Users/christopherlinder/opt/anaconda3/pkgs/libboost-1.82.0-hf53b9f2_2/include/boost/mpi/python.hpp"
 
@@ -11,7 +12,7 @@ long t(string temp) {
     time_t epochtime = mktime(&time);
     return epochtime;
 }
-
+//typedef boost::intrusive::list<orderEvent> L;
 int main() {
     vector<double> y;
     y.push_back(1);

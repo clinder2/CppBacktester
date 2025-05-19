@@ -51,7 +51,7 @@ class MRStrategy : public strategy_base {
                 }
             }
         }
-        
+
         void plotBrollinger(string symbol) {
             vector<double> MA;
             for (int i = 0; i < sum[symbol].size(); i++) {

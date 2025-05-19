@@ -46,6 +46,7 @@ void While::while_loop() {
             if (e->type=="MARKET") {
                 port->update_timeindex(*e);
                 s->calculate_signals(*e);
+                s->updateMITQ(*e);
             } else if (e->type == "SIGNAL") {
                 port->update_signal(*dynamic_cast<signalEvent*>(e));
             } else if (e->type == "ORDER") {

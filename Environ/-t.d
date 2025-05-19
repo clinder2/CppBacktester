@@ -1,6 +1,6 @@
-build/output: test.cpp test.hpp while.cpp while.hpp execution.cpp \
-  execution.hpp MPortfolio.cpp portfolio.cpp portfolio.hpp \
-  MRStrategy.cpp strategy.cpp strategy.hpp eventDatautils.hpp event.cpp \
+-t: test.cpp test.hpp while.cpp while.hpp execution.cpp execution.hpp \
+  MPortfolio.cpp portfolio.cpp portfolio.hpp MRStrategy.cpp strategy.cpp \
+  strategy.hpp eventDatautils.hpp event.cpp \
   /Users/christopherlinder/Desktop/CppBacktester/Environ/event.hpp \
   data.cpp event.hpp data.hpp \
   /Users/christopherlinder/Desktop/CppBacktester/Environ/reader.hpp \

@@ -14,19 +14,15 @@ class MPortfolio : public naivePortfolio {
             double curr_quantity = current_positions[symbol];
             string order_type = "MRK";
             int quantity = 0;
-            string direction = "";
+            string direction = signal.type;
 
             if (algo=="MR") {
-                if (order_quantity==1) {
-                    quantity = 1;
-                    direction = "BUY";
+                if (direction=="SELL" && curr_quantity>=order_quantity) {
+                    quantity = order_quantity;
+                } else if (direction=="BUY") {
+                    quantity=order_quantity;
                 } else {
-                    if (curr_quantity==0) {
-                        quantity=0;
-                    } else {
-                        quantity=1;
-                    }
-                    direction="SELL";
+                    quantity=0;
                 }
             }
 

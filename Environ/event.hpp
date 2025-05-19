@@ -57,6 +57,7 @@ class orderEvent : public event {
         string order_type;
         int quantity;
         string direction;
+        long auxPrice;
 
         orderEvent() {
             type="ORDER";
@@ -68,6 +69,10 @@ class orderEvent : public event {
             order_type=_order_type;
             quantity=_quantity;
             direction=_direction;
+        }
+
+        void setAuxPrice(long a) {
+            auxPrice = a;
         }
 };
 
