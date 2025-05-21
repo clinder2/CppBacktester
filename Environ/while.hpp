@@ -1,5 +1,5 @@
-#ifndef WHILE_H
-#define WHILE_H
+//#ifndef WHILE_H
+//#define WHILE_H
 
 //#include "event.hpp"
 //#include "event.cpp"
@@ -12,7 +12,11 @@
 //#include "strategy.cpp"
 //#include "MRStrategy.cpp"
 //#include "execution.hpp"
-#include "execution.cpp"
+//#ifndef simulatedExecutionHandler
+#include "execution.hpp"
+//#endif
+#include "MRStrategy.hpp"
+#include "MPortfolio.hpp"
 
 class While {
     public:
@@ -22,8 +26,9 @@ class While {
         long end;
         long init_Cap;
         string p_type;
-        While(vector<string>* assets, string algo, long start, long end, long init_Cap, string p_type);
+
+        While(vector<string>* _assets, string _algo, long _start, long _end, long _init_Cap, string _p_type);
         void while_loop();
 };
 
-#endif
+//#endif

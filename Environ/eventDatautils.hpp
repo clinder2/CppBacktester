@@ -1,7 +1,7 @@
 #ifndef UTILS
 #define UTILS
-#include "event.cpp"
+#include "event.hpp"
 //#include "event.cpp"
-#include "data.cpp"
+#include "data.hpp"
 
 #endif

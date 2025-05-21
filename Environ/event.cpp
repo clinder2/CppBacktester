@@ -33,6 +33,10 @@ fillEvent::fillEvent(string _symbol, float _date_time, string _exchange, int _qu
     commission=calculate_ib_commission(commission);
 } */
 
+void signalEvent::setMeta(string data) {
+    meta=data;
+}
+
 float fillEvent::calculate_ib_commission(float commission) {
     float full_cost=1.3;
     return full_cost*quantity*fill_cost;

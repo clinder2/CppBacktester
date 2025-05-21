@@ -1,7 +1,23 @@
 #include "LOB.hpp"
+#include <iostream>
+
+long HM_LOB_ID = 0;
+
+HM_LOB::HM_LOB() {
+    buy = map<long, deque<orderEvent>, greater<long> >();
+    sell = map<long, deque<orderEvent> >();
+    cache = map<long, orderEvent>();
+}
+
+long HM_LOB::reg_order(orderEvent o) {
+    long id = HM_LOB_ID++;
+    cache[id] = o;
+    return id;
+}
 
 //limit order table add
-fillEvent HM_LOB::add(orderEvent o) {
+fillEvent* HM_LOB::add(orderEvent o) {
+    cout<<"book add\n";
     if (o.type=="LMT") { //try to buy/sell from LOB, then place in LOB
         if (o.type=="BUY") {
             long init = o.quantity;
@@ -23,7 +39,7 @@ fillEvent HM_LOB::add(orderEvent o) {
                     buy[o.auxPrice]=curr;
                 }
             }
-            return *(new fillEvent(o.symbol, 0, "A", init-o.quantity, "BUY", 0, 0));
+            return new fillEvent(o.symbol, 0, "A", init-o.quantity, "BUY", 0, 0);
         } else if (o.type=="SELL") {
             long init = o.quantity;
             deque<orderEvent>& b = buy.begin()->second;
@@ -44,7 +60,7 @@ fillEvent HM_LOB::add(orderEvent o) {
                     sell[o.auxPrice]=curr;
                 }
             }
-            return *(new fillEvent(o.symbol, 0, "A", init-o.quantity, "SELL", 0, 0));
+            return new fillEvent(o.symbol, 0, "A", init-o.quantity, "SELL", 0, 0);
         }
     } else if (o.type=="MKT") { //market order, just buy/sell
         if (o.type=="BUY") {
@@ -57,7 +73,7 @@ fillEvent HM_LOB::add(orderEvent o) {
                     s=sell.begin()->second;
                 }
             }
-            return *(new fillEvent(o.symbol, 0, "A", o.quantity, "BUY", 0, 0));
+            return new fillEvent(o.symbol, 0, "A", o.quantity, "BUY", 0, 0);
         } else if (o.type=="SELL") {
             deque<orderEvent>& b = buy.begin()->second;
             while (o.quantity>0 && b.size()>0 && b.front().auxPrice <= o.auxPrice) {
@@ -68,9 +84,18 @@ fillEvent HM_LOB::add(orderEvent o) {
                     b=buy.begin()->second;
                 }
             }
-            return *(new fillEvent(o.symbol, 0, "A", o.quantity, "SELL", 0, 0));
+            return new fillEvent(o.symbol, 0, "A", o.quantity, "SELL", 0, 0);
         }
-    } else {
-        return *(new fillEvent("DEAD", 0, "A", 0, "DEAD", 0, 0));
     }
+    fillEvent* fill = new fillEvent("DEAD", 0, "A", 0, "DEAD", 0, 0);
+    fill->type="DEAD";
+    return fill;
+}
+
+void HM_LOB::cancel(long id) {
+
+}
+
+void HM_LOB::execute(orderEvent o) {
+
 }

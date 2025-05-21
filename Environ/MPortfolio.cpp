@@ -1,39 +1,45 @@
 //#include "event.hpp"
 //#include "portfolio.hpp"
-#include "portfolio.cpp"
+#include "MPortfolio.hpp"
+#include "event.hpp"
 
-class MPortfolio : public naivePortfolio {
-    public:
-        MPortfolio(dataHandler* _bars, deque<event*>& _events, long _start_date, long _init_capital=1000) : naivePortfolio( _bars, _events, _start_date, _init_capital) {};
-        
-        orderEvent* generate_order(signalEvent signal) {
-            string symbol = signal.symbol;
-            string algo = signal.algo;
+MPortfolio::MPortfolio(dataHandler* _bars, deque<event*>& _events, long _start_date, long _init_capital) : naivePortfolio( _bars, _events, _start_date, _init_capital) {};
 
-            long order_quantity = signal.quantity;
-            double curr_quantity = current_positions[symbol];
-            string order_type = "MRK";
-            int quantity = 0;
-            string direction = signal.type;
+orderEvent* MPortfolio::generate_order(signalEvent signal) {
+    string symbol = signal.symbol;
+    string algo = signal.algo;
 
-            if (algo=="MR") {
-                if (direction=="SELL" && curr_quantity>=order_quantity) {
-                    quantity = order_quantity;
-                } else if (direction=="BUY") {
-                    quantity=order_quantity;
-                } else {
-                    quantity=0;
-                }
-            }
+    long order_quantity = signal.quantity;
+    double curr_quantity = current_positions[symbol];
+    string order_type = "MKT";
+    int quantity = 0;
+    string direction = signal.signal_type;
 
-            orderEvent* order = new orderEvent(symbol, order_type, quantity, direction);
-            return order;
+    if (algo=="MR") {
+        if (signal.meta=="LMT") {
+            cout<<"gen LMT\n";
+            return generate_LMT_order(signal);
         }
-
-        void update_signal(signalEvent signal) {
-            if (signal.type=="SIGNAL") {
-                orderEvent* order = generate_order(signal);
-                events->push_back(order);
-            }
+        if (direction=="SELL" && curr_quantity>=order_quantity) {
+            quantity = order_quantity;
+        } else if (direction=="BUY") {
+            quantity=order_quantity;
+        } else {
+            quantity=0;
         }
-};
+    }
+
+    orderEvent* order = new orderEvent(symbol, order_type, quantity, direction);
+    return order;
+}
+
+orderEvent* MPortfolio::generate_LMT_order(signalEvent signal) {
+    return new orderEvent(signal.symbol, "LMT", signal.quantity, signal.signal_type);
+}
+
+void MPortfolio::update_signal(signalEvent signal) {
+    if (signal.type=="SIGNAL") {
+        orderEvent* order = generate_order(signal);
+        events->push_back(order);
+    }
+}

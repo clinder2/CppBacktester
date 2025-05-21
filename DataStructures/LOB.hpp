@@ -4,10 +4,13 @@
 #include "DLL.hpp"
 #include <map>
 #include <functional>
-#include <tuple>
+#include "../Environ/event.hpp"
+#include "../Environ/data.hpp"
+
+extern long HM_LOB_ID;
 
 //Class representing order for DLL, convert orderEvent into order for LOB
-class order : public list_base_hook<> {
+/* class order : public list_base_hook<> {
     public:
         string symbol;
         string order_type;
@@ -32,39 +35,39 @@ class order : public list_base_hook<> {
         };
 };
 
-typedef boost::intrusive::list<order> LOBList;
+typedef boost::intrusive::list<order> LOBList; */
 
 class LOB {
     public:
+        LOB();
         virtual ~LOB() {};
-        virtual fillEvent add(orderEvent order)=0;
+        virtual fillEvent* add(orderEvent order)=0;
         virtual void cancel(long id)=0;
         virtual void execute(orderEvent order)=0;
 };
 
-extern long HM_LOB_ID;
+//extern long HM_LOB_ID=0;
 
-class HM_LOB : LOB {
+class HM_LOB {
     public:
         map<long, deque<orderEvent>, greater<long> > buy;
         map<long, deque<orderEvent> > sell;
 
         map<long, orderEvent> cache;
 
-        HM_LOB() {
+        //virtual ~HM_LOB()=0;
+        HM_LOB();
+        /* HM_LOB() {
+            HM_LOB_ID=0;
             buy = map<long, deque<orderEvent>, greater<long> >();
             sell = map<long, deque<orderEvent> >();
             cache = map<long, orderEvent>();
-        }
+        } */
 
-        long reg_order(orderEvent o) {
-            long id = HM_LOB_ID++;
-            cache[id] = o;
-            return id;
-        }
-        fillEvent add(orderEvent o);
-        void cancel(long id) {};
-        void execute(orderEvent o) {};
+        long reg_order(orderEvent o);
+        fillEvent* add(orderEvent o);
+        void cancel(long id);
+        void execute(orderEvent o);
 };
 
 #endif

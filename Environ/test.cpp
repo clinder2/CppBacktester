@@ -1,9 +1,10 @@
 #include "test.hpp"
-#include <boost/intrusive/list.hpp>
+//#include "graphing/graphUtils.hpp"
+//#include <boost/intrusive/list.hpp>
 //#include "gnuplot-iostream/gnuplot-iostream.h"
 //#include "/Users/christopherlinder/opt/anaconda3/pkgs/libboost-1.82.0-hf53b9f2_2/include/boost/mpi/python.hpp"
 
-namespace plt = matplotlibcpp;
+//namespace plt = matplotlibcpp;
 
 long t(string temp) {
     tm time = {};
@@ -19,7 +20,7 @@ int main() {
     y.push_back(2);
     //plt::plot(y);
     //plt::show();
-    boost::ptr_vector<int> a;
+    //boost::ptr_vector<int> a;
     long start = t("2025-01-02");
     long end = t("2025-05-12");
 
@@ -45,8 +46,10 @@ int main() {
     sym.push_back("IONQ");
     sym.push_back("NVDA");
     sym.push_back("PLTR");
-    cout<<sym.size();
+    //cout<<sym.size();
+    //While w(&sym, "MA", 0, 1, 0, "AA");
     While w(&sym, "MA", start, end, 1000, "MODULAR");
+    //While w(&sym, "BUYANDHOLD", start, end, 1000, "SIMPLE");
     w.while_loop();
     return 0;
 }

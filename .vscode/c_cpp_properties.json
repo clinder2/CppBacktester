@@ -3,20 +3,22 @@
         {
             "name": "Mac",
             "includePath": [
-                //"/opt/homebrew/Cellar/boost/1.88.0/include",
                 "/usr/local/lib/**",
                 "/usr/local/include/**",
-                //"/opt/local/include/boost/**",
-                //"/opt/local/libexec/boost/1.76/include",
-                //"/Users/christopherlinder/opt/anaconda3/pkgs/libboost-1.82.0-hf53b9f2_2/include/boost/mpi",
-                //"${workspaceFolder}/**",
-                //"${workspaceFolder}/Environ",
-                //"/opt/local/libexec/boost/1.76/include/boost/hana/ext/",
                 "/usr/local/",
                 "/Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost",
                 "/Users/christopherlinder/Library/Mobile Documents/.Trash/boost/boost/stage/lib",
-                "/Users/christopherlinder/miniconda3/bin/"
-                //"/Users/christopherlinder/opt/anaconda3/pkgs/libboost-1.82.0-hf53b9f2_2/include/boost/hana/"
+                "/Users/christopherlinder/miniconda3/bin/",
+                "/Users/christopherlinder/Library/Python/3.9/lib/python/site-packages/numpy/_core/include",
+                "/Users/christopherlinder/miniconda3/lib",
+                "/Users/christopherlinder/miniconda3/include/python3.12",
+                "${workspaceFolder}/.git",
+                "${workspaceFolder}/.git",
+                "${workspaceFolder}/.git",
+                "${workspaceFolder}/.git",
+                "${workspaceFolder}/.git",
+                "${workspaceFolder}/Environ",
+                "${workspaceFolder}/DataStructures"
             ],
             "defines": [],
             "macFrameworkPath": [

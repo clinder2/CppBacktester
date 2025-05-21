@@ -11,6 +11,9 @@
         "tuple": "cpp",
         "iostream": "cpp",
         "array": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "__locale": "cpp",
+        "deque": "cpp",
+        "numeric": "cpp"
     }
 }

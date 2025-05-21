@@ -1,11 +1,13 @@
 #ifndef GUTILS
 #define GUTILS
 
-#include "matplotlib-cpp/matplotlibcpp.h"
+#define WITHOUT_NUMPY
+#include "../matplotlib-cpp/matplotlibcpp.h"
 #include <vector>
 #include <string>
-#include "data.hpp"
+#include "../data.hpp"
 
+using namespace std;
 namespace plt = matplotlibcpp;
 
 void plotTimeSeries(vector<bar> ts, long time_step=1);
