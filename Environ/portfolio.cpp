@@ -2,7 +2,13 @@
 //#include "event.hpp"
 //#include <algorithm>
 
-naivePortfolio::naivePortfolio(dataHandler* _bars, deque<event*>& _events, long _start_date, long _init_capital) {
+long portID=0;
+
+portfolio::portfolio() {
+    id=portID++;
+}
+
+naivePortfolio::naivePortfolio(dataHandler* _bars, deque<event*>& _events, long _start_date, long _init_capital) : portfolio() {
     bars=_bars;
     symbol_list=bars->symbol_list;
     events=&_events;
@@ -114,6 +120,24 @@ void naivePortfolio::update_fill(fillEvent e) {
     }
 }
 
+void naivePortfolio::update_LMT_fill(orderEvent fill) {
+    int fill_d = 0;
+    if (fill.direction=="BUY") {
+        fill_d=1;
+    } else if (fill.direction=="SELL") {
+        fill_d=-1;
+    }
+    current_positions[fill.symbol]+=(fill_d*fill.quantity);
+    long commission=0;
+
+    double fill_cost = fill.auxPrice; //assuming fill happened at target price
+    double cost = fill_d*fill_cost*fill.quantity;
+    current_holdings[fill.symbol]+=cost;
+    current_holdings["commission"]+=commission;
+    current_holdings["cash"]-=(cost+commission);
+    current_holdings["total"]-=(cost+commission);
+}
+
 orderEvent* naivePortfolio::generate_naive_order(signalEvent signal) {
     string symbol = signal.symbol;
     string direction = signal.signal_type;
@@ -141,5 +165,6 @@ orderEvent* naivePortfolio::generate_naive_order(signalEvent signal) {
     }
     
     orderEvent* order = new orderEvent(symbol, order_type, mkt_quantity, order_direction);
+    order->setPort(id);
     return order;
 }

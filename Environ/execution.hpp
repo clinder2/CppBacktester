@@ -17,11 +17,13 @@ class executionHandler {
 class simulatedExecutionHandler : public executionHandler {
     public:
         deque<event*>* events;
+        map<long, portfolio*> portfolios; //mapping port ids to portfolios
         HM_LOB book;
 
-        simulatedExecutionHandler(deque<event*>& _events) {
+        simulatedExecutionHandler(deque<event*>& _events, map<long, portfolio*> _portfolios) {
+            portfolios=_portfolios;
             events=&_events;
-            book=HM_LOB();
+            book=HM_LOB(portfolios);
         }
         void execute_order(orderEvent _event);
 };

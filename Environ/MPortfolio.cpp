@@ -30,11 +30,14 @@ orderEvent* MPortfolio::generate_order(signalEvent signal) {
     }
 
     orderEvent* order = new orderEvent(symbol, order_type, quantity, direction);
+    order->setPort(id);
     return order;
 }
 
 orderEvent* MPortfolio::generate_LMT_order(signalEvent signal) {
-    return new orderEvent(signal.symbol, "LMT", signal.quantity, signal.signal_type);
+    orderEvent* e = new orderEvent(signal.symbol, "LMT", signal.quantity, signal.signal_type);
+    e->setPort(id);
+    return e;
 }
 
 void MPortfolio::update_signal(signalEvent signal) {

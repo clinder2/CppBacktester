@@ -61,6 +61,7 @@ class orderEvent : public event {
         int quantity;
         string direction;
         long auxPrice;
+        long port;
 
         orderEvent() {
             type="ORDER";
@@ -76,6 +77,10 @@ class orderEvent : public event {
 
         void setAuxPrice(long a) {
             auxPrice = a;
+        }
+
+        void setPort(long _port) {
+            port=_port;
         }
 };
 

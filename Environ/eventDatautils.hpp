@@ -4,4 +4,6 @@
 //#include "event.cpp"
 #include "data.hpp"
 
+extern long portID;
+
 #endif

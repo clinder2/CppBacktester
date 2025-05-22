@@ -6,6 +6,7 @@
 #include <functional>
 #include "../Environ/event.hpp"
 #include "../Environ/data.hpp"
+#include "../Environ/portfolio.hpp"
 
 extern long HM_LOB_ID;
 
@@ -50,13 +51,16 @@ class LOB {
 
 class HM_LOB {
     public:
-        map<long, deque<orderEvent>, greater<long> > buy;
-        map<long, deque<orderEvent> > sell;
+        map<long, deque<orderEvent*>, greater<long> > buy;
+        map<long, deque<orderEvent*> > sell;
 
-        map<long, orderEvent> cache;
+        map<orderEvent*, long> cache;
+
+        map<long, portfolio*> port;
 
         //virtual ~HM_LOB()=0;
         HM_LOB();
+        HM_LOB(map<long, portfolio*> port);
         /* HM_LOB() {
             HM_LOB_ID=0;
             buy = map<long, deque<orderEvent>, greater<long> >();
@@ -64,9 +68,9 @@ class HM_LOB {
             cache = map<long, orderEvent>();
         } */
 
-        long reg_order(orderEvent o);
+        long reg_order(orderEvent* o);
         fillEvent* add(orderEvent o);
-        void cancel(long id);
+        void cancel(orderEvent *o);
         void execute(orderEvent o);
 };
 

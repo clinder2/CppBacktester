@@ -31,7 +31,9 @@ void While::while_loop() {
         s=new strategy(&temp, q);
         s=dynamic_cast<strategy*>(s);
     }
-    simulatedExecutionHandler executor(q);
+    map<long, portfolio*> ports; //support for multiple portfolio simulation
+    ports[port->id] = port;
+    simulatedExecutionHandler executor(q, ports);
     bool testing = true;
     while (testing) {
         temp.update_bars();
@@ -57,5 +59,5 @@ void While::while_loop() {
         cout<<port->current_holdings["total"]<<" total\n";
     }
     s->plotData(2);
-    cout<<executor.book.sell.size();
+    cout<<executor.book.buy.size();
 }
