@@ -8,6 +8,10 @@
     book=HM_LOB();
 } */
 
+simulatedExecutionHandler::simulatedExecutionHandler() {
+
+}
+
 void simulatedExecutionHandler::execute_order(orderEvent e) {
     if (e.type=="ORDER") {
         auto curr = chrono::system_clock::now();
@@ -18,7 +22,9 @@ void simulatedExecutionHandler::execute_order(orderEvent e) {
             fillEvent* fill = new fillEvent(e.symbol, t, "ARCA", e.quantity, e.direction, 0, 0);
             events->push_back(fill);
         } else if (e.order_type=="LMT") { //limit order
+            pthread_mutex_lock(&LOBlock);
             fillEvent* fill = book.add(e);
+            pthread_mutex_unlock(&LOBlock);
             events->push_back(fill);
         }
     }

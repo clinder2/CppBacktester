@@ -30,7 +30,8 @@ class signalEvent : public event {
         string signal_type;
         long quantity;
         string algo;
-        string meta;
+        string meta; //i.e. limit
+        long auxPrice; //i.e. limit price
         signalEvent(string _symbol, long _datetime, string _signal_type, long _quantity, string _algo) {
             type = "SIGNAL";
             symbol=_symbol;
@@ -38,6 +39,10 @@ class signalEvent : public event {
             signal_type=_signal_type;
             quantity=_quantity;
             algo=_algo;
+        }
+
+        void setAuxPrice(long a) {
+            auxPrice = a;
         }
 
         void setMeta(string data);
@@ -79,7 +84,7 @@ class orderEvent : public event {
             auxPrice = a;
         }
 
-        void setPort(long _port) {
+        void setPort(long _port) { //attach order to portfolio
             port=_port;
         }
 };

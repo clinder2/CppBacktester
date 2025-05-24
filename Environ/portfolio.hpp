@@ -15,6 +15,8 @@ class portfolio {
         deque<event*>* events;
         long start_date;
         long init_capital;
+        string strategy_type;
+        string p_type;
 
         vector<map<string, double> > all_positions;
         map<string, double> current_positions;
@@ -27,6 +29,12 @@ class portfolio {
         virtual void update_signal(signalEvent e)=0;
         virtual void update_fill(fillEvent e)=0;
         virtual void update_LMT_fill(orderEvent e)=0;
+        void set_Strategy(string strategy) {
+            strategy_type=strategy;
+        }
+        void set_ptype(string type) {
+            p_type=type;
+        }
 };
 
 class naivePortfolio : public portfolio {

@@ -56,7 +56,7 @@ fillEvent* HM_LOB::add(orderEvent o) {
         } else if (o.direction=="SELL") {
             long init = o.quantity;
             if (buy.size()>0) {
-            deque<orderEvent*>& b = buy.begin()->second;
+                deque<orderEvent*>& b = buy.begin()->second;
                 while (o.quantity>0 && b.size()>0 && b.front()->auxPrice >= o.auxPrice) { //while willing buyers
                     o.quantity=max(0, o.quantity-b.front()->quantity);
                     orderEvent* filled = b.front();

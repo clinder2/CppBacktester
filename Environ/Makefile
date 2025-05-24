@@ -8,6 +8,7 @@ BUILD_DIR := build
 SOURCES=$(wildcard *.cpp)
 SOURCES+=../DataStructures/LOB.cpp
 SOURCES+=graphing/graphUtils.cpp
+SOURCES+=multiPort/complexWhile.cpp
 OBJS:=$(patsubst ./%.cpp,$(BUILD_DIR)/%.o,$(SOURCES)) #good
 #OBJS:=$(SOURCES:.cpp=.o)
 #DEPS:= $(OBJS:.o=.d)

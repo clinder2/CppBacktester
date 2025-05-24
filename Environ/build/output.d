@@ -1,5 +1,15 @@
-build/output: graphing/graphUtils.cpp graphing/graphUtils.hpp \
-  graphing/../matplotlib-cpp/matplotlibcpp.h \
+build/output: multiPort/complexWhile.cpp multiPort/complexWhile.hpp \
+  multiPort/../While.hpp multiPort/../execution.hpp \
+  multiPort/../eventDatautils.hpp multiPort/../event.hpp \
+  multiPort/../data.hpp \
+  /Users/christopherlinder/Desktop/CppBacktester/Environ/event.hpp \
+  /Users/christopherlinder/Desktop/CppBacktester/Environ/reader.hpp \
+  multiPort/../../DataStructures/LOB.hpp ../DataStructures/DLL.hpp \
+  ../DataStructures/../Environ/event.hpp \
+  ../DataStructures/../Environ/data.hpp \
+  ../DataStructures/../Environ/portfolio.hpp multiPort/../MRStrategy.hpp \
+  multiPort/../strategy.hpp multiPort/../graphing/graphUtils.hpp \
+  multiPort/../graphing/../matplotlib-cpp/matplotlibcpp.h \
   /Users/christopherlinder/miniconda3/include/python3.12/Python.h \
   /Users/christopherlinder/miniconda3/include/python3.12/patchlevel.h \
   /Users/christopherlinder/miniconda3/include/python3.12/pyconfig.h \
@@ -109,6 +119,5 @@ build/output: graphing/graphUtils.cpp graphing/graphUtils.hpp \
   /Users/christopherlinder/miniconda3/include/python3.12/cpython/fileutils.h \
   /Users/christopherlinder/miniconda3/include/python3.12/cpython/pyfpe.h \
   /Users/christopherlinder/miniconda3/include/python3.12/tracemalloc.h \
-  graphing/../data.hpp \
-  /Users/christopherlinder/Desktop/CppBacktester/Environ/event.hpp \
-  /Users/christopherlinder/Desktop/CppBacktester/Environ/reader.hpp
+  multiPort/../graphing/../data.hpp multiPort/../MPortfolio.hpp \
+  multiPort/../portfolio.hpp

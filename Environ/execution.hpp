@@ -19,11 +19,14 @@ class simulatedExecutionHandler : public executionHandler {
         deque<event*>* events;
         map<long, portfolio*> portfolios; //mapping port ids to portfolios
         HM_LOB book;
+        pthread_mutex_t LOBlock;
 
+        simulatedExecutionHandler();
         simulatedExecutionHandler(deque<event*>& _events, map<long, portfolio*> _portfolios) {
             portfolios=_portfolios;
             events=&_events;
             book=HM_LOB(portfolios);
+            pthread_mutex_init(&LOBlock, NULL);
         }
         void execute_order(orderEvent _event);
 };
