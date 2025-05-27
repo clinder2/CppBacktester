@@ -5,6 +5,7 @@
 long portID=0;
 
 portfolio::portfolio() {
+    first=0;
     id=portID++;
 }
 

@@ -17,6 +17,7 @@ class portfolio {
         long init_capital;
         string strategy_type;
         string p_type;
+        int first;
 
         vector<map<string, double> > all_positions;
         map<string, double> current_positions;
@@ -34,6 +35,9 @@ class portfolio {
         }
         void set_ptype(string type) {
             p_type=type;
+        }
+        void set_first() {
+            first=1;
         }
 };
 

@@ -1,8 +1,10 @@
 #include "../While.hpp"
 #include "../execution.hpp"
 #include "../portfolio.hpp"
+#include <unistd.h>
 
 extern simulatedExecutionHandler executor;
+extern historicDataHandler handler;
 /* extern pthread_mutex_t qlock;
 extern pthread_mutex_t LOBlock;
 extern pthread_mutex_t executorlock; */

@@ -10,6 +10,8 @@
 
 using namespace std;
 
+extern pthread_cond_t data_var;
+
 struct bar {
     long time;
     double close;
@@ -24,8 +26,11 @@ class dataHandler {
         virtual ~dataHandler() {};
         vector<string>* symbol_list;
         map<string, vector<bar>* > latest_symbol_data;
+        dataHandler();
         dataHandler(vector<string>* _symbol_list) {
             symbol_list=_symbol_list;
+            pthread_cond_t data_var;
+            pthread_cond_init(&data_var, NULL);
         }
         virtual vector<bar> get_latest_bars(string symbol, int n=1) {};
         virtual void update_bars() {};
@@ -45,6 +50,7 @@ class historicDataHandler : public dataHandler {
 
         map<string,int> symbol_index;
         vector<long> times;
+        historicDataHandler();
         historicDataHandler(deque<event*>& _events, long _start, long _end, vector<string>* _symbol_list, string path) : dataHandler(_symbol_list) {
             events = &_events;
             start=_start;

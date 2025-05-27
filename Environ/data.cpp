@@ -17,6 +17,14 @@ using namespace std;
     _pull_process_symbols();
 } */
 
+dataHandler::dataHandler() {
+    
+}
+
+historicDataHandler::historicDataHandler() {
+
+}
+
 vector<bar> historicDataHandler::get_latest_bars(string symbol, int n) {
     vector<bar>* bars = latest_symbol_data[symbol];
     vector<bar> latest;
@@ -38,5 +46,5 @@ void historicDataHandler::update_bars() {
     }
     marketEvent* m = new marketEvent();
     events->push_back(m);
-    //cout<<events->size();
+    //pthread_cond_signal(&data_var);
 }
