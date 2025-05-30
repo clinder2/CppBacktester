@@ -1,9 +1,9 @@
 #include "sampleACF.hpp"
 #include <numeric>
 
-long sm(vector<bar> v) {
+double sm(vector<bar> v) {
     int n = v.size();
-    long x = accumulate(v.begin(), v.end(), 0, 
+    double x = accumulate(v.begin(), v.end(), 0, 
         [](int sum, const bar& b) {
             return sum+b.close;
         });
@@ -13,10 +13,11 @@ long sm(vector<bar> v) {
 long s_autocovf(vector<bar> v, int h) {
     int n = v.size();
     long x_ = sm(v);
-    int gamma;
+    int gamma=0;
     h=abs(h);
     for (int i = 0; i < n-h; i++) {
         gamma+=(v[i+h].close-x_)*(v[i].close-x_);
+        //cout<<x_<<", "<<v[i+h].close<<", "<<gamma<<" g\n";
     }
     return gamma/n;
 }

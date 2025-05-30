@@ -2,7 +2,9 @@
 
 vector<double> DB(vector<bar> series, int n) {
     double phi1=sample_acf(series, 1);
+    //cout<<s_autocovf(series, 0)<<" DB\n";
     double v0 = s_autocovf(series, 0);
+    //cout<<sm(series)<<" DB\n";
     vector<double> prev;
     prev.push_back(phi1);
     vector<double> autocov;

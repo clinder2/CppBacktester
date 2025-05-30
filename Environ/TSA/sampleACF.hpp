@@ -3,7 +3,7 @@
 
 using namespace std;
 
-long sm(vector<bar> v);
+double sm(vector<bar> v);
 
 long s_autocovf(vector<bar> v, int h);
 
