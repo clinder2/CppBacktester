@@ -27,6 +27,14 @@ orderEvent* MPortfolio::generate_order(signalEvent signal) {
         } else {
             quantity=0;
         }
+    } else if (algo=="TSA") {
+        if (direction=="SELL" && curr_quantity>=order_quantity) {
+            quantity = order_quantity;
+        } else if (direction=="BUY") {
+            quantity=order_quantity;
+        } else {
+            quantity=0;
+        }
     }
 
     orderEvent* order = new orderEvent(symbol, order_type, quantity, direction);

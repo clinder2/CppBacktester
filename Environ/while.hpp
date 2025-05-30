@@ -17,6 +17,7 @@
 //#endif
 #include "MRStrategy.hpp"
 #include "MPortfolio.hpp"
+#include "TSAStrategy.hpp"
 
 class While {
     public:

@@ -27,6 +27,9 @@ void While::while_loop() {
     } else if (algo=="MA") {
         s=new MRStrategy(&temp, q, 10);
         s=dynamic_cast<MRStrategy*>(s);
+    } else if (algo=="TSA") {
+        s=new TSAStrategy(&temp, q);
+        s=dynamic_cast<TSAStrategy*>(s);
     } else if (algo=="BUYANDHOLD") {
         s=new strategy(&temp, q);
         s=dynamic_cast<strategy*>(s);
