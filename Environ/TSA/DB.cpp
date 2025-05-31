@@ -12,9 +12,10 @@ vector<double> DB(vector<bar> series, int n) {
     double prev_v = v0;
     for (int i = 2; i<=n; i++) {
         double gamma_n = s_autocovf(series, i);
+        cout<<gamma_n<<"\n";
         double phi_nn = gamma_n;
         for (int j = 0; j < i-1; j++) {
-            phi_nn -= prev[j]*autocov[i-1-j];
+            phi_nn -= prev[j]*autocov[i-2-j];
         }
         phi_nn /= prev_v;
         for (int j = 0; j < i-1; j++) {
@@ -23,6 +24,7 @@ vector<double> DB(vector<bar> series, int n) {
         prev.push_back(phi_nn);
         autocov.push_back(gamma_n);
         prev_v *= (1-phi_nn*phi_nn);
+        cout<<phi_nn<<", "<<gamma_n<<" db\n";
     }
     return prev;
 }
