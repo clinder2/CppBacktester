@@ -11,5 +11,5 @@ class TSAStrategy : public strategy_base {
         void plotData(int type);
 
     private:
-        int n = 10;
+        int n = 20;
 };

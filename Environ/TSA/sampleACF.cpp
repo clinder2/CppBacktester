@@ -17,7 +17,7 @@ double s_autocovf(vector<bar> v, int h) {
     h=abs(h);
     for (int i = 0; i < n-h; i++) {
         gamma+=(v[i+h].close-x_)*(v[i].close-x_);
-        //cout<<x_<<", "<<v[i+h].close<<", "<<gamma<<" g\n";
+        //cout<<x_<<", "<<v[i+h].close<<", "<<(v[i+h].close-x_)*(v[i].close-x_)<<" g\n";
     }
     return gamma/(n-1);
 }

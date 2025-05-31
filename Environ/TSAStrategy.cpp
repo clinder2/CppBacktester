@@ -13,8 +13,8 @@ void TSAStrategy::calculate_signals(event e) {
                 vector<double> coeffs = DB(latest, n);
                 double next=0;
                 for (int i = n-1; i>=0; i--) {
-                    //cout<<coeffs[i]<<" c\n";
                     next+=coeffs[i]*latest[latest.size()-n+i].close;
+                    cout<<s<<", "<<coeffs[i]<<", "<<next<<", "<<latest[latest.size()-n+i].close<<" c\n";
                 }
                 cout<<next<<" next\n";
                 if (bars->latest_symbol_data[s]->back().close > next) {

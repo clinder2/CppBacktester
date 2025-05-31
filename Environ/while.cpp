@@ -11,7 +11,7 @@ While::While(vector<string>* _assets, string _algo, long _start, long _end, long
 
 void While::while_loop() {
     deque<event*> q = *(new deque<event*>());
-    historicDataHandler temp(q, start, end, assets, "/Users/christopherlinder/Desktop/CppBacktester/HistoricData/test.csv");
+    historicDataHandler temp(q, start, end, assets, "/Users/christopherlinder/Desktop/CppBacktester/HistoricData/test2.csv");
     portfolio* port = nullptr;
     if (p_type=="SIMPLE") {
         port = new naivePortfolio(&temp, q, start);

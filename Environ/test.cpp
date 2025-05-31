@@ -23,7 +23,7 @@ int main() {
     //plt::show();
     //boost::ptr_vector<int> a;
     long start = t("2025-01-02");
-    long end = t("2025-05-12");
+    long end = t("2025-05-09");
 
     deque<event>* queue = new deque<event>();
     vector<string> sym;
@@ -31,7 +31,6 @@ int main() {
     sym.push_back("IONQ");
     sym.push_back("NVDA");
     sym.push_back("PLTR");
-    //cout<<sym.size();
     //While w(&sym, "MA", 0, 1, 0, "AA");
     While w(&sym, "TSA", start, end, 1000, "MODULAR");
     //While w(&sym, "BUYANDHOLD", start, end, 1000, "SIMPLE");
