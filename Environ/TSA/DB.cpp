@@ -2,7 +2,7 @@
 
 vector<double> DB(vector<bar> series, int n) {
     double phi1=sample_acf(series, 1);
-    cout<<phi1<<" DB\n";
+    //cout<<phi1<<" DB\n";
     double v0 = s_autocovf(series, 0);
     //cout<<sm(series)<<" DB\n";
     vector<double> prev;

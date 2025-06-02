@@ -29,9 +29,10 @@ void MRStrategy::calculate_signals(event e) {
             signalEvent* signal = new signalEvent(s, datetime, type, quantity, "MR");
             events->push_back(signal);
 
-            if (cost>1.1*sum[s].back()/window) {
-                long auxPrice = 1.1*sum[s].back()/window;
-                quantity = (int)(.1*sum[s].back()/window);
+            if (cost<0.9*sum[s].back()/window) {
+                long auxPrice = 0.9*sum[s].back()/window;
+                quantity = (int)(.9*sum[s].back()/window);
+                quantity = 1;
                 cout<<quantity<<" quantity\n";
                 signalEvent* limit = new signalEvent(s, datetime, "BUY", quantity, "MR");
                 limit->setMeta("LMT");

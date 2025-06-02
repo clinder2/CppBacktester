@@ -31,8 +31,8 @@ int main() {
     sym.push_back("IONQ");
     sym.push_back("NVDA");
     sym.push_back("PLTR");
-    //While w(&sym, "MA", 0, 1, 0, "AA");
-    While w(&sym, "TSA", start, end, 1000, "MODULAR");
+    While w(&sym, "MA", start, end, 1000, "MODULAR");
+    //While w(&sym, "TSA", start, end, 1000, "MODULAR");
     //While w(&sym, "BUYANDHOLD", start, end, 1000, "SIMPLE");
     w.while_loop();
     return 0;

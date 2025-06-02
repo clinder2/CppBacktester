@@ -28,12 +28,9 @@ orderEvent* MPortfolio::generate_order(signalEvent signal) {
             quantity=0;
         }
     } else if (algo=="TSA") {
-        cout<<direction<<"\n";
         if (direction=="SELL" && curr_quantity>=order_quantity) {
-            cout<<"SELL\n";
             quantity = order_quantity;
         } else if (direction=="BUY") {
-            cout<<"BUY\n";
             quantity=order_quantity;
         } else {
             quantity=0;
