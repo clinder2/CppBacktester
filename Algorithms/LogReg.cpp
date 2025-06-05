@@ -1,6 +1,10 @@
 #define _USE_MATH_DEFINES
 #include "LogReg.hpp"
 
+algo::algo() {}
+
+algo::algo(vector<bar> _data) {data = _data;}
+
 LogReg::LogReg(vector<bar> data, int _numLags, bool _useVol) : algo(data) {
     numLags = _numLags;
     useVol=_useVol;
@@ -8,40 +12,49 @@ LogReg::LogReg(vector<bar> data, int _numLags, bool _useVol) : algo(data) {
     vector<double> thetas(numLags+1, 1); //thetas in ascending order
     testTrainSplit();
     makedata();
+    getLH();
 }
 
 double LogReg::LL(int i) {
     double e = thetas[0];
+    cout<<i<<"\n";
     for (int j = 1; j <= numLags; j++) {
+        cout<<i-(numLags-j)<<"\n";
         e+=thetas[j]*pct_change[i-(numLags-j)];
     }
     return pow(M_E, e)/(1+pow(M_E, e));
 }
 
 void LogReg::fit() {
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 1; i++) {
         vector<double> v(pct_change.size()-numLags+1);
-        int j = numLags-1;
-        generate_n(v.begin(), v.end(), [&j]() {
-            return LL(j++);
-        });
-        vector<double> dt(v.size());
-        j=0;
-        generate_n(dt.begin(), dt.end(), [&j]() {
-            return (v[j]-LH[j])*pct_change[j];
-        });
-        j=0;
-        generate_n(thetas.begin(), thetas.end(), [&j]() {
-            return thetas[j] + dt[j];
-        });
+        int off = numLags-1;
+        for (int k = 0; k < v.size(); k++) {
+            cout<<k+off;
+            v[k] = LL(k+off);
+        }
+        /* vector<vector<double> > dt(thetas.size(), *(new vector<double>));
+        for (int j = 0; j < v.size(); j++) {
+            dt[0].push_back((v[j]-LH[j+off]));
+        }
+        for (int k = 1; k < thetas.size(); k++) {
+            for (int j = 0; j < v.size(); j++) {
+                dt[k].push_back((v[j]-LH[j+off])*pct_change[j+off-(k-1)]);
+            }
+        } */
     }
+}
+
+vector<double> LogReg::predict() {
+
 }
 
 void LogReg::testTrainSplit() {
     
 }
 
-vector<int> LogReg::getLH() {
+void LogReg::getLH() {
+    vector<int> LH(pct_change.size());
     for (int i = 0; i < pct_change.size(); i++) {
         LH.push_back(signbit(pct_change[i]));
     }

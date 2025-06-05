@@ -7,8 +7,10 @@ class algo {
         vector<bar> data;
         vector<bar> test;
         vector<bar> train;
+        algo();
         algo(vector<bar> data);
-        virtual void fit();
-        virtual vector<double> predict();
-        virtual void testTrainSplit();
+        virtual ~algo() {};
+        virtual void fit()=0;
+        virtual vector<double> predict()=0;
+        virtual void testTrainSplit()=0;
 };

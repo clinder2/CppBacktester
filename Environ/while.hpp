@@ -18,6 +18,7 @@
 #include "MRStrategy.hpp"
 #include "MPortfolio.hpp"
 #include "TSAStrategy.hpp"
+#include "../Algorithms/LogReg.hpp"
 
 class While {
     public:

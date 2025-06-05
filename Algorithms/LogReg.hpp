@@ -14,7 +14,7 @@ class LogReg : algo {
     private:
         vector<double> pct_change;
         vector<double> thetas; //thetas in ascending order
-        vector<int> getLH();
+        void getLH();
         void makedata();
         double LL(int i);
 };

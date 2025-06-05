@@ -10,6 +10,7 @@ SOURCES+=../DataStructures/LOB.cpp
 SOURCES+=graphing/graphUtils.cpp
 SOURCES+=multiPort/complexWhile.cpp
 SOURCES+=TSA/sampleACF.cpp TSA/DB.cpp
+SOURCES+=../Algorithms/LogReg.cpp
 OBJS:=$(patsubst ./%.cpp,$(BUILD_DIR)/%.o,$(SOURCES)) #good
 #OBJS:=$(SOURCES:.cpp=.o)
 #DEPS:= $(OBJS:.o=.d)
