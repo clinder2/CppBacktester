@@ -62,9 +62,8 @@ void While::while_loop() {
         cout<<port->current_holdings["total"]<<" total\n";
     }
     //s->plotData(2);
-    cout<<executor.book.buy.size();
+    cout<<executor.book.buy.size()<<"\n";
     vector<bar> curr = *(temp.latest_symbol_data["AAPL"]);
-    cout<<curr.size()<<"\n";
     LogReg lr(curr,2,false);
     lr.fit();
 }

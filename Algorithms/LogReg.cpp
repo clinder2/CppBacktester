@@ -1,3 +1,4 @@
+#include <numeric>
 #define _USE_MATH_DEFINES
 #include "LogReg.hpp"
 
@@ -9,7 +10,7 @@ LogReg::LogReg(vector<bar> data, int _numLags, bool _useVol) : algo(data) {
     numLags = _numLags;
     useVol=_useVol;
     tt_ratio = .5;
-    vector<double> thetas(numLags+1, 1); //thetas in ascending order
+    thetas = *(new vector<double>(numLags+1, 1)); //thetas in ascending order
     testTrainSplit();
     makedata();
     getLH();
@@ -17,11 +18,11 @@ LogReg::LogReg(vector<bar> data, int _numLags, bool _useVol) : algo(data) {
 
 double LogReg::LL(int i) {
     double e = thetas[0];
-    cout<<i<<"\n";
     for (int j = 1; j <= numLags; j++) {
-        cout<<i-(numLags-j)<<"\n";
         e+=thetas[j]*pct_change[i-(numLags-j)];
+        cout<<thetas[j]<<", "<<pct_change[i-(numLags-j)]<<"\n";
     }
+    //cout<<e<<", "<<pow(M_E, e)<<"\n";
     return pow(M_E, e)/(1+pow(M_E, e));
 }
 
@@ -30,10 +31,9 @@ void LogReg::fit() {
         vector<double> v(pct_change.size()-numLags+1);
         int off = numLags-1;
         for (int k = 0; k < v.size(); k++) {
-            cout<<k+off;
             v[k] = LL(k+off);
         }
-        /* vector<vector<double> > dt(thetas.size(), *(new vector<double>));
+        vector<vector<double> > dt(thetas.size(), *(new vector<double>()));
         for (int j = 0; j < v.size(); j++) {
             dt[0].push_back((v[j]-LH[j+off]));
         }
@@ -41,7 +41,20 @@ void LogReg::fit() {
             for (int j = 0; j < v.size(); j++) {
                 dt[k].push_back((v[j]-LH[j+off])*pct_change[j+off-(k-1)]);
             }
-        } */
+            //cout<<dt[k][0]<<" dt\n";
+        }
+        for (int j = 0; j < thetas.size(); j++) {
+            double s = 0;
+            for (auto v : dt[j]) {
+                s+=v;
+                //cout<<v<<"\n";
+            }
+            //cout<<dt[j][0]<<", "<<accumulate(dt[j].begin(), dt[j].end(), 0)<<"\n";
+            thetas[j] += .5*s;
+        }
+    }
+    for (auto i : thetas) {
+        cout<<i<<" theta\n";
     }
 }
 
@@ -54,7 +67,7 @@ void LogReg::testTrainSplit() {
 }
 
 void LogReg::getLH() {
-    vector<int> LH(pct_change.size());
+    LH = *(new vector<int>(pct_change.size(),0));
     for (int i = 0; i < pct_change.size(); i++) {
         LH.push_back(signbit(pct_change[i]));
     }
