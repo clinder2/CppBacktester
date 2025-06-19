@@ -20,14 +20,14 @@ double LogReg::LL(int i) {
     double e = thetas[0];
     for (int j = 1; j <= numLags; j++) {
         e+=thetas[j]*pct_change[i-(numLags-j)];
-        cout<<thetas[j]<<", "<<pct_change[i-(numLags-j)]<<"\n";
+        //cout<<thetas[j]<<", "<<pct_change[i-(numLags-j)]<<"\n";
     }
     //cout<<e<<", "<<pow(M_E, e)<<"\n";
     return pow(M_E, e)/(1+pow(M_E, e));
 }
 
 void LogReg::fit() {
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < 3; i++) {
         vector<double> v(pct_change.size()-numLags+1);
         int off = numLags-1;
         for (int k = 0; k < v.size(); k++) {
@@ -36,6 +36,7 @@ void LogReg::fit() {
         vector<vector<double> > dt(thetas.size(), *(new vector<double>()));
         for (int j = 0; j < v.size(); j++) {
             dt[0].push_back((v[j]-LH[j+off]));
+            //cout<<dt[0].back()<<", "<<v[j]<<", "<<LH[j+off]<<", "<<j+off<<"\n";
         }
         for (int k = 1; k < thetas.size(); k++) {
             for (int j = 0; j < v.size(); j++) {
@@ -52,10 +53,11 @@ void LogReg::fit() {
             //cout<<dt[j][0]<<", "<<accumulate(dt[j].begin(), dt[j].end(), 0)<<"\n";
             thetas[j] += .5*s;
         }
+        for (auto i : thetas) {
+            cout<<i<<" theta\n";
+        }
     }
-    for (auto i : thetas) {
-        cout<<i<<" theta\n";
-    }
+    cout<<LL(3);
 }
 
 vector<double> LogReg::predict() {
@@ -67,7 +69,7 @@ void LogReg::testTrainSplit() {
 }
 
 void LogReg::getLH() {
-    LH = *(new vector<int>(pct_change.size(),0));
+    LH = *(new vector<int>());
     for (int i = 0; i < pct_change.size(); i++) {
         LH.push_back(signbit(pct_change[i]));
     }

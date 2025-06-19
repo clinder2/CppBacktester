@@ -19,6 +19,7 @@
 #include "MPortfolio.hpp"
 #include "TSAStrategy.hpp"
 #include "../Algorithms/LogReg.hpp"
+#include "../Algorithms/signature.hpp"
 
 class While {
     public:

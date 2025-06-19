@@ -5,7 +5,7 @@ class LogReg : algo {
         int numLags;
         bool useVol;
         double tt_ratio;
-        vector<int> LH;
+        vector<int> LH; //low high-01
         LogReg(vector<bar> data, int numLags, bool useVol);
         void fit();
         vector<double> predict();

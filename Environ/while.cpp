@@ -66,4 +66,5 @@ void While::while_loop() {
     vector<bar> curr = *(temp.latest_symbol_data["AAPL"]);
     LogReg lr(curr,2,false);
     lr.fit();
+    plotLeadLag(curr);
 }

@@ -1,6 +1,9 @@
 #include "../Environ/eventDatautils.hpp"
+#include "../Environ/graphing/graphUtils.hpp"
 #include <cmath>
 #include <utility>
+#ifndef ALGO
+#define ALGO
 
 class algo {
     public:
@@ -14,3 +17,5 @@ class algo {
         virtual vector<double> predict()=0;
         virtual void testTrainSplit()=0;
 };
+
+#endif

@@ -3,6 +3,7 @@ CXXFLAGS := -g -std=c++11
 INCLUDES := -I /Users/christopherlinder/Library/Mobile\ Documents/.Trash/boost/boost -I /Users/christopherlinder/miniconda3/include/python3.12 -I /Users/christopherlinder/Library/Python/3.9/lib/python/site-packages/numpy/_core/include -I ../DataStructures -I /graphing
 
 CXXFLAGS += -MMD
+CXXFLAGS += -w
 BUILD_DIR := build
 #SOURCES:=test.cpp
 SOURCES=$(wildcard *.cpp)
@@ -11,6 +12,7 @@ SOURCES+=graphing/graphUtils.cpp
 SOURCES+=multiPort/complexWhile.cpp
 SOURCES+=TSA/sampleACF.cpp TSA/DB.cpp
 SOURCES+=../Algorithms/LogReg.cpp
+SOURCES+=../Algorithms/signature.cpp
 OBJS:=$(patsubst ./%.cpp,$(BUILD_DIR)/%.o,$(SOURCES)) #good
 #OBJS:=$(SOURCES:.cpp=.o)
 #DEPS:= $(OBJS:.o=.d)
