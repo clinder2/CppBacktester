@@ -22,7 +22,6 @@ vector<double> lag_t(vector<bar> d) {
 void plotLeadLag(vector<bar> data) {
     vector<double> lead = lead_t(data);
     vector<double> lag = lag_t(data);
-    cout<<lag.size()<<"\n";
     plt::plot(lead, lag);
     plt::show();
 }
