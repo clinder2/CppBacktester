@@ -20,6 +20,7 @@
 #include "TSAStrategy.hpp"
 #include "../Algorithms/LogReg.hpp"
 #include "../Algorithms/signature.hpp"
+#include "../Algorithms/lasso.hpp"
 
 class While {
     public:

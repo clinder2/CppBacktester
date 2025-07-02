@@ -1,5 +1,4 @@
 #include "algo.hpp"
-#include <Eigen/Dense>
 
 class lasso : algo {
     public:
@@ -7,10 +6,11 @@ class lasso : algo {
     int features;
     Eigen::MatrixXf X;
     double lambda;
+    Eigen::VectorXf beta;
     lasso(int values, int features, Eigen::MatrixXf X, double lambda);
     void fit();
     vector<double> predict();
     void testTrainSplit();
     private:
-    vector<double> coord_descent();
+    Eigen::VectorXf coord_descent();
 };

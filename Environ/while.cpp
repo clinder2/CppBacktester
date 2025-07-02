@@ -67,4 +67,6 @@ void While::while_loop() {
     LogReg lr(curr,2,false);
     lr.fit();
     plotLeadLag(curr);
+    Eigen::MatrixXf x(10,10);
+    lasso l(10, 10, x, .5);
 }

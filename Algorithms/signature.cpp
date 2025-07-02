@@ -25,3 +25,7 @@ void plotLeadLag(vector<bar> data) {
     plt::plot(lead, lag);
     plt::show();
 }
+
+Eigen::MatrixXf sig_matrix(vector<vector<double> > datastreams) {
+    
+}

@@ -2,6 +2,7 @@
 #include "../Environ/graphing/graphUtils.hpp"
 #include <cmath>
 #include <utility>
+#include <Eigen/Dense>
 #ifndef ALGO
 #define ALGO
 
